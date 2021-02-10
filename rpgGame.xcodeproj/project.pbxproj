@@ -20,6 +20,10 @@
 		9202D95425CCAA1E002B2EDF /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D94E25CCAA1E002B2EDF /* MotherView.swift */; };
 		9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D94F25CCAA1E002B2EDF /* ScoreView.swift */; };
 		9202D95A25CCAA26002B2EDF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D95925CCAA26002B2EDF /* BackgroundView.swift */; };
+		992FA56D25D34E8A00C72FCB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FA56A25D34E8A00C72FCB /* GameScene.swift */; };
+		992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 992FA56C25D34E8A00C72FCB /* GameScene.sks */; };
+		99E5554F25D362D900AD0CCE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5554E25D362D900AD0CCE /* GameView.swift */; };
+		99E5555C25D3680B00AD0CCE /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5555B25D3680B00AD0CCE /* LevelsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,10 @@
 		9202D94E25CCAA1E002B2EDF /* MotherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		9202D94F25CCAA1E002B2EDF /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		9202D95925CCAA26002B2EDF /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		992FA56A25D34E8A00C72FCB /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		992FA56C25D34E8A00C72FCB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		99E5554E25D362D900AD0CCE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		99E5555B25D3680B00AD0CCE /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +118,12 @@
 			isa = PBXGroup;
 			children = (
 				9202D91C25CCAA0F002B2EDF /* rpgGameApp.swift */,
+				992FA56A25D34E8A00C72FCB /* GameScene.swift */,
+				9202D92525CCAA10002B2EDF /* Info.plist */,
 				9202D95F25CCAAFF002B2EDF /* MainViews */,
 				9202D95E25CCAADF002B2EDF /* Navigation */,
-				9202D92025CCAA10002B2EDF /* Assets.xcassets */,
-				9202D92525CCAA10002B2EDF /* Info.plist */,
+				992FA57325D34E9C00C72FCB /* Scenes */,
+				992FA56825D34E0B00C72FCB /* Assets */,
 				9202D92225CCAA10002B2EDF /* Preview Content */,
 			);
 			path = rpgGame;
@@ -158,13 +168,31 @@
 		9202D95F25CCAAFF002B2EDF /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
-				9202D91E25CCAA0F002B2EDF /* ContentView.swift */,
 				9202D95925CCAA26002B2EDF /* BackgroundView.swift */,
+				9202D91E25CCAA0F002B2EDF /* ContentView.swift */,
+				9202D94A25CCAA1E002B2EDF /* TitleView.swift */,
+				99E5554E25D362D900AD0CCE /* GameView.swift */,
+				99E5555B25D3680B00AD0CCE /* LevelsView.swift */,
 				9202D94B25CCAA1E002B2EDF /* OptionsView.swift */,
 				9202D94F25CCAA1E002B2EDF /* ScoreView.swift */,
-				9202D94A25CCAA1E002B2EDF /* TitleView.swift */,
 			);
 			path = MainViews;
+			sourceTree = "<group>";
+		};
+		992FA56825D34E0B00C72FCB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				9202D92025CCAA10002B2EDF /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		992FA57325D34E9C00C72FCB /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				992FA56C25D34E8A00C72FCB /* GameScene.sks */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9202D92425CCAA10002B2EDF /* Preview Assets.xcassets in Resources */,
+				992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */,
 				9202D92125CCAA10002B2EDF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,14 +325,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				992FA56D25D34E8A00C72FCB /* GameScene.swift in Sources */,
 				9202D95A25CCAA26002B2EDF /* BackgroundView.swift in Sources */,
 				9202D95225CCAA1E002B2EDF /* ViewRouter.swift in Sources */,
 				9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */,
 				9202D95425CCAA1E002B2EDF /* MotherView.swift in Sources */,
 				9202D91F25CCAA0F002B2EDF /* ContentView.swift in Sources */,
+				99E5555C25D3680B00AD0CCE /* LevelsView.swift in Sources */,
 				9202D91D25CCAA0F002B2EDF /* rpgGameApp.swift in Sources */,
 				9202D95025CCAA1E002B2EDF /* TitleView.swift in Sources */,
 				9202D95125CCAA1E002B2EDF /* OptionsView.swift in Sources */,
+				99E5554F25D362D900AD0CCE /* GameView.swift in Sources */,
 				9202D95325CCAA1E002B2EDF /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,7 +495,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"rpgGame/Preview Content\"";
-				DEVELOPMENT_TEAM = 3X3K7P5SSQ;
+				DEVELOPMENT_TEAM = KP4PBABC6N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = rpgGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -471,7 +503,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ChrisHolmes.rpgGame;
+				PRODUCT_BUNDLE_IDENTIFIER = Mitchell.rpgGame1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -485,7 +517,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"rpgGame/Preview Content\"";
-				DEVELOPMENT_TEAM = 3X3K7P5SSQ;
+				DEVELOPMENT_TEAM = KP4PBABC6N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = rpgGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -493,7 +525,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ChrisHolmes.rpgGame;
+				PRODUCT_BUNDLE_IDENTIFIER = Mitchell.rpgGame1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

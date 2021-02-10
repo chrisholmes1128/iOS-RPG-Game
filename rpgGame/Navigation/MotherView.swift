@@ -18,6 +18,10 @@ struct MotherView: View {
                 OptionsView().transition(.scale)
             case .page3:
                 ScoreView().transition(.scale)
+            case .LevelsView:
+                LevelsView().transition(.scale)
+            case .GameView:
+                GameView().transition(.scale)
         }
     }
 }

@@ -35,6 +35,7 @@ struct TitleView: View {
                             .onTapGesture {
                                 withAnimation{
                                     titleShowing.toggle()
+                                    viewRouter.currentPage = .LevelsView
                                 }
                             }
                         Text("OPTIONS")
