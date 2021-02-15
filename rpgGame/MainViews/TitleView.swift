@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import UIKit
+import GameKit
 
 struct TitleView: View {
     @Binding var titleShowing: Bool
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
+        ZStack {
             VStack {
                 if titleShowing {
                     VStack(spacing: 20){
@@ -75,6 +78,7 @@ struct TitleView: View {
                             .onTapGesture {
                                 withAnimation{
                                     titleShowing.toggle()
+                                    viewRouter.currentPage = .page4
                                 }
                             }
                         
@@ -88,6 +92,7 @@ struct TitleView: View {
                     titleShowing.toggle()
                 }
             }
+        }
     }
 }
 

@@ -20,6 +20,8 @@
 		9202D95425CCAA1E002B2EDF /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D94E25CCAA1E002B2EDF /* MotherView.swift */; };
 		9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D94F25CCAA1E002B2EDF /* ScoreView.swift */; };
 		9202D95A25CCAA26002B2EDF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D95925CCAA26002B2EDF /* BackgroundView.swift */; };
+		92F1863825D2045300F46216 /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863725D2045300F46216 /* GameCenter.swift */; };
+		92F1863D25D208E300F46216 /* GameCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863C25D208E300F46216 /* GameCenterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		9202D94E25CCAA1E002B2EDF /* MotherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		9202D94F25CCAA1E002B2EDF /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		9202D95925CCAA26002B2EDF /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		92F1863725D2045300F46216 /* GameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
+		92F1863C25D208E300F46216 /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,8 @@
 				9202D94B25CCAA1E002B2EDF /* OptionsView.swift */,
 				9202D94F25CCAA1E002B2EDF /* ScoreView.swift */,
 				9202D94A25CCAA1E002B2EDF /* TitleView.swift */,
+				92F1863725D2045300F46216 /* GameCenter.swift */,
+				92F1863C25D208E300F46216 /* GameCenterView.swift */,
 			);
 			path = MainViews;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92F1863D25D208E300F46216 /* GameCenterView.swift in Sources */,
 				9202D95A25CCAA26002B2EDF /* BackgroundView.swift in Sources */,
 				9202D95225CCAA1E002B2EDF /* ViewRouter.swift in Sources */,
 				9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */,
@@ -304,6 +311,7 @@
 				9202D91D25CCAA0F002B2EDF /* rpgGameApp.swift in Sources */,
 				9202D95025CCAA1E002B2EDF /* TitleView.swift in Sources */,
 				9202D95125CCAA1E002B2EDF /* OptionsView.swift in Sources */,
+				92F1863825D2045300F46216 /* GameCenter.swift in Sources */,
 				9202D95325CCAA1E002B2EDF /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +469,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"rpgGame/Preview Content\"";
 				DEVELOPMENT_TEAM = 3X3K7P5SSQ;
@@ -473,6 +482,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ChrisHolmes.rpgGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -483,6 +493,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"rpgGame/Preview Content\"";
 				DEVELOPMENT_TEAM = 3X3K7P5SSQ;
@@ -495,6 +506,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ChrisHolmes.rpgGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
