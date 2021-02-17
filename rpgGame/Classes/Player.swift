@@ -34,6 +34,10 @@ class Player {
     }
     
     func Move(angle: CGFloat, touch: CGPoint, joystick: SKSpriteNode) {
+        // animation lock
+        if(elapsedTime < cooldown){
+            return
+        }
         //velocity
         let newVelocity = CGVector(dx: playerSpeed * cos(angle), dy: playerSpeed * sin(angle))
         player!.physicsBody!.velocity = newVelocity
@@ -49,12 +53,18 @@ class Player {
     }
     
     func Dash(angle: CGFloat, touch: CGPoint, joystick: SKSpriteNode) {
+        // animation lock
+        if(elapsedTime < cooldown){
+            return
+        }
         //velocity
         let animation = SKAction.moveBy(x: playerDashDistance * cos(angle), y: playerDashDistance * sin(angle), duration: 0.1)
         
         //animation
         newAction = .dash
         player!.run(animation)
+        startTime = NSDate()
+        cooldown = 0.5
         
         //direction
         var direction:CGFloat
@@ -64,10 +74,11 @@ class Player {
             direction = 1.0
         }
         player?.xScale = abs(player!.xScale) * direction
+        
     }
     
     func Attack() {
-        let comboTimer = 2.0
+        let comboTimer = 1.3
         //reset if miss combo
         if elapsedTime >= comboTimer {
             currentAction = .idle
@@ -84,11 +95,11 @@ class Player {
         }
     }
     
-    func update() {
+    func Update() {
         // animation cooldown
         elapsedTime = startTime.timeIntervalSinceNow * -1
         
-        //run if velocity > 0
+        //move if velocity > 0
         let normal = sqrt(pow((player!.physicsBody?.velocity.dx)!, 2) + pow((player!.physicsBody?.velocity.dy)!, 2))
         if(normal > 0){
             newAction = .run
@@ -96,7 +107,6 @@ class Player {
         
         //execute animation
         if newAction != currentAction {
-            print(newAction)
             switch newAction {
             case .idle:
                 player!.run(SKAction(named: "warrior_idle")!)
@@ -116,7 +126,7 @@ class Player {
             currentAction = newAction
         }
         
-        //idle if stop running
+        //idle if stop moving
         if(currentAction == .run && normal == 0){
             newAction = .idle
         }

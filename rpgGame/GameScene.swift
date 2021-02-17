@@ -8,14 +8,14 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Instance Variables
-    let zombieSpeed: CGFloat = 75.0
+    let zombieSpeed: CGFloat = 15.0
     
     var joystick: SKSpriteNode?
     var joystickHandle: SKSpriteNode?
     var player:Player?
-    var skeleton: [SKSpriteNode] = []
+    var enemies: [Enemy?] = []
     
     var touchTime = NSDate()
     
@@ -30,11 +30,12 @@ class GameScene: SKScene {
         for child in self.children {
             if child.name == "skeleton" {
                 if let child = child as? SKSpriteNode {
-                    skeleton.append(child)
-                    child.run(SKAction(named: "skeleton_idle")!)
+                    enemies.append(Enemy(enemy: child, name: "skeleton", moveSpeed: 75.0))
                 }
             }
         }
+        //Set physics contact delegate
+        physicsWorld.contactDelegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -104,19 +105,28 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        /* Physics contact delegate implementation */
+        /* Get references to the bodies involved in the collision */
+        let contactA:SKPhysicsBody = contact.bodyA
+        let contactB:SKPhysicsBody = contact.bodyB
+        /* Get references to the physics body parent SKSpriteNode */
+        let nodeA = contactA.node as! SKSpriteNode
+        let nodeB = contactB.node as! SKSpriteNode
+        
+        print("collusion")
+    }
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        player!.update()
+        player!.Update()
+        for enemy in enemies {
+            enemy?.Update(target: player!.player!.position)
+        }
         updateCamera()
-        updateEnemy()
     }
     
     func updateCamera() {
         //camera?.position = player!.position
-    }
-    
-    func updateEnemy() {
-        
     }
 }
