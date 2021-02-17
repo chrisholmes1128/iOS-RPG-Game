@@ -24,6 +24,11 @@
 		92F1863D25D208E300F46216 /* GameCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863C25D208E300F46216 /* GameCenterView.swift */; };
 		992FA56D25D34E8A00C72FCB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FA56A25D34E8A00C72FCB /* GameScene.swift */; };
 		992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 992FA56C25D34E8A00C72FCB /* GameScene.sks */; };
+		995FEF1225DC6B7200A1D259 /* WarriorActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995FEF1125DC6B7200A1D259 /* WarriorActions.sks */; };
+		995FEF9625DD140800A1D259 /* SkeletonActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995FEF9525DD140800A1D259 /* SkeletonActions.sks */; };
+		995FEF9F25DD44BE00A1D259 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEF9E25DD44BE00A1D259 /* Player.swift */; };
+		995FEFA425DD454D00A1D259 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEFA325DD454D00A1D259 /* Enemy.swift */; };
+		995FEFAC25DD458300A1D259 /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEFAB25DD458300A1D259 /* Skeleton.swift */; };
 		99E5554F25D362D900AD0CCE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5554E25D362D900AD0CCE /* GameView.swift */; };
 		99E5555C25D3680B00AD0CCE /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5555B25D3680B00AD0CCE /* LevelsView.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +74,11 @@
 		92F1863C25D208E300F46216 /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
 		992FA56A25D34E8A00C72FCB /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		992FA56C25D34E8A00C72FCB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		995FEF1125DC6B7200A1D259 /* WarriorActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WarriorActions.sks; sourceTree = "<group>"; };
+		995FEF9525DD140800A1D259 /* SkeletonActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SkeletonActions.sks; sourceTree = "<group>"; };
+		995FEF9E25DD44BE00A1D259 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		995FEFA325DD454D00A1D259 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		995FEFAB25DD458300A1D259 /* Skeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
 		99E5554E25D362D900AD0CCE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		99E5555B25D3680B00AD0CCE /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +136,9 @@
 				9202D92525CCAA10002B2EDF /* Info.plist */,
 				9202D95F25CCAAFF002B2EDF /* MainViews */,
 				9202D95E25CCAADF002B2EDF /* Navigation */,
+				995FEF9D25DD44A000A1D259 /* Classes */,
 				992FA57325D34E9C00C72FCB /* Scenes */,
+				995FEF8125DD00AE00A1D259 /* Actions */,
 				992FA56825D34E0B00C72FCB /* Assets */,
 				9202D92225CCAA10002B2EDF /* Preview Content */,
 			);
@@ -174,7 +186,6 @@
 			children = (
 				9202D95925CCAA26002B2EDF /* BackgroundView.swift */,
 				9202D91E25CCAA0F002B2EDF /* ContentView.swift */,
-				9202D94A25CCAA1E002B2EDF /* TitleView.swift */,
 				99E5554E25D362D900AD0CCE /* GameView.swift */,
 				99E5555B25D3680B00AD0CCE /* LevelsView.swift */,
 				9202D94B25CCAA1E002B2EDF /* OptionsView.swift */,
@@ -200,6 +211,25 @@
 				992FA56C25D34E8A00C72FCB /* GameScene.sks */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		995FEF8125DD00AE00A1D259 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				995FEF1125DC6B7200A1D259 /* WarriorActions.sks */,
+				995FEF9525DD140800A1D259 /* SkeletonActions.sks */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		995FEF9D25DD44A000A1D259 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				995FEF9E25DD44BE00A1D259 /* Player.swift */,
+				995FEFA325DD454D00A1D259 /* Enemy.swift */,
+				995FEFAB25DD458300A1D259 /* Skeleton.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +338,8 @@
 				9202D92425CCAA10002B2EDF /* Preview Assets.xcassets in Resources */,
 				992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */,
 				9202D92125CCAA10002B2EDF /* Assets.xcassets in Resources */,
+				995FEF1225DC6B7200A1D259 /* WarriorActions.sks in Resources */,
+				995FEF9625DD140800A1D259 /* SkeletonActions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,12 +364,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				995FEFAC25DD458300A1D259 /* Skeleton.swift in Sources */,
 				92F1863D25D208E300F46216 /* GameCenterView.swift in Sources */,
 				992FA56D25D34E8A00C72FCB /* GameScene.swift in Sources */,
 				9202D95A25CCAA26002B2EDF /* BackgroundView.swift in Sources */,
 				9202D95225CCAA1E002B2EDF /* ViewRouter.swift in Sources */,
 				9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */,
 				9202D95425CCAA1E002B2EDF /* MotherView.swift in Sources */,
+				995FEF9F25DD44BE00A1D259 /* Player.swift in Sources */,
 				9202D91F25CCAA0F002B2EDF /* ContentView.swift in Sources */,
 				99E5555C25D3680B00AD0CCE /* LevelsView.swift in Sources */,
 				9202D91D25CCAA0F002B2EDF /* rpgGameApp.swift in Sources */,
@@ -345,6 +379,7 @@
 				9202D95125CCAA1E002B2EDF /* OptionsView.swift in Sources */,
 				92F1863825D2045300F46216 /* GameCenter.swift in Sources */,
 				99E5554F25D362D900AD0CCE /* GameView.swift in Sources */,
+				995FEFA425DD454D00A1D259 /* Enemy.swift in Sources */,
 				9202D95325CCAA1E002B2EDF /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,7 +540,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"rpgGame/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KP4PBABC6N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = rpgGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -529,7 +564,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"rpgGame/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KP4PBABC6N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = rpgGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
