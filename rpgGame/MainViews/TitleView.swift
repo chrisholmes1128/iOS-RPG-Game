@@ -52,7 +52,7 @@ struct TitleView: View {
                             .onTapGesture {
                                 withAnimation{
                                     titleShowing.toggle()
-                                    viewRouter.currentPage = .page2
+                                    viewRouter.currentPage = .optionsView
                                 }
                             }
                         
@@ -67,7 +67,7 @@ struct TitleView: View {
                             .onTapGesture {
                                 withAnimation{
                                     titleShowing.toggle()
-                                    viewRouter.currentPage = .page3
+                                    viewRouter.currentPage = .highScoresView
                                 }
                             }
                         
@@ -79,7 +79,7 @@ struct TitleView: View {
                             .onTapGesture {
                                 withAnimation{
                                     titleShowing.toggle()
-                                    viewRouter.currentPage = .page4
+                                    viewRouter.currentPage = .gameCenterView
                                 }
                             }
                         

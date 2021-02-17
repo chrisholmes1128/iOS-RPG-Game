@@ -12,18 +12,20 @@ struct MotherView: View {
 
     var body: some View {
         switch viewRouter.currentPage {
-            case .page1:
+            case .homeScreenView:
                 ContentView()
-            case .page2:
+            case .optionsView:
                 OptionsView().transition(.scale)
-            case .page3:
+            case .highScoresView:
                 ScoreView().transition(.scale)
-            case .page4:
+            case .gameCenterView:
                 GameCenterView().transition(.scale)
             case .LevelsView:
                 LevelsView().transition(.scale)
             case .GameView:
                 GameView().transition(.scale)
+            case .PauseMenuView:
+                PauseMenuView(pauseMenuShowing: Binding.constant(true)).transition(.scale)
         }
     }
 }

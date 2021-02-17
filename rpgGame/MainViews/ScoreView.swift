@@ -22,7 +22,7 @@ struct ScoreView: View {
                 
                 Button(action: {
                     withAnimation {
-                        viewRouter.currentPage = .page1
+                        viewRouter.currentPage = .homeScreenView
                     }
                 }) {
                     Text("Home Screen")

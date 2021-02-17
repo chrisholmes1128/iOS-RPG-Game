@@ -9,8 +9,29 @@ import SpriteKit
 import SwiftUI
 
 struct GameView: View {
+    @State private var pauseMenuShowing = false
+    @EnvironmentObject var viewRouter: ViewRouter
+    
     var body: some View {
-        SKViewContainer()
+        ZStack {
+            PauseMenuView(pauseMenuShowing: $pauseMenuShowing).padding()
+                
+            SKViewContainer().ignoresSafeArea()
+                
+            VStack(alignment: .leading) {
+                Button(action: {
+                    withAnimation {
+                        pauseMenuShowing.toggle()
+                        viewRouter.currentPage = .PauseMenuView
+                    }
+                }) {
+                    Image("pauseButton")
+                        .resizable()
+                        .frame(width: 40, height: 40, alignment: .trailing)
+                }
+            }.padding(.bottom, 700)
+            .padding(.leading, 300)
+        }
     }
 }
 
@@ -25,9 +46,8 @@ struct SKViewContainer: UIViewRepresentable {
                 view.backgroundColor = UIColor.red
                 return view
         }
-
         view.presentScene(scene)
-
+        
         return view
     }
 
@@ -37,6 +57,6 @@ struct SKViewContainer: UIViewRepresentable {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView().environmentObject(ViewRouter())
     }
 }

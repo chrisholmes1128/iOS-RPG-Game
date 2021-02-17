@@ -7,9 +7,16 @@
 
 import SpriteKit
 import GameplayKit
+import UIKit
+import SwiftUI
 
 class GameScene: SKScene {
     // MARK: - Instance Variables
+    @Published var gameIsPaused = false {
+        didSet {
+            isPaused = gameIsPaused
+        }
+    }
     
     let playerSpeed: CGFloat = 150.0
     let playerDashDistance: CGFloat = 150.0

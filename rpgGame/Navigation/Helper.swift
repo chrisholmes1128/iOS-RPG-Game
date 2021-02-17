@@ -8,9 +8,11 @@
 import Foundation
 
 enum Page {
-    case page1
-    case page2
-    case page3
+    case homeScreenView
+    case optionsView
+    case highScoresView
+    case gameCenterView
     case LevelsView
     case GameView
+    case PauseMenuView
 }

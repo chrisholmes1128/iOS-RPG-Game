@@ -22,7 +22,7 @@ struct ContentView: View {
             VStack {
                 Image("icons8-katana-50").resizable()
                     .frame(width: 100.0, height: 100.0, alignment: .top)
-                    .position(x:80, y: 290)
+                    .position(x:80, y: 270)
                     .rotationEffect(.init(degrees: 45))
                     .accentColor(.white)
                     .colorInvert()
