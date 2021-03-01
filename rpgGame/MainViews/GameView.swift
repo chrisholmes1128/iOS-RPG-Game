@@ -47,7 +47,11 @@ struct SKViewContainer: UIViewRepresentable {
                 return view
         }
         view.presentScene(scene)
-        
+
+        view.ignoresSiblingOrder = false
+        view.showsFPS = true
+        view.showsNodeCount = true
+
         return view
     }
 
