@@ -17,7 +17,7 @@ struct TitleView: View {
         ZStack {
             VStack {
                 if titleShowing {
-                    VStack(spacing: 20){
+                    VStack(spacing: 7){
                         Spacer()
                         
                         Text("Pirate Invaders")

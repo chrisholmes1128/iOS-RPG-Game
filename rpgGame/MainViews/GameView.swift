@@ -27,10 +27,11 @@ struct GameView: View {
                 }) {
                     Image("pauseButton")
                         .resizable()
+                        .colorInvert()
                         .frame(width: 40, height: 40, alignment: .trailing)
                 }
-            }.padding(.bottom, 700)
-            .padding(.leading, 300)
+            }.padding(.bottom, 310)
+            .padding(.leading, 10)
         }
     }
 }
