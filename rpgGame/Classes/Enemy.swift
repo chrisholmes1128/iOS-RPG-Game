@@ -9,9 +9,15 @@ import SpriteKit
 
 class Enemy {
     var enemy: SKSpriteNode?
+    var target: Player?
     var name: String?
     
     var moveSpeed: CGFloat?
+    var maxHealth: CGFloat?
+    var health: CGFloat?
+    var attackRange: CGFloat?
+    var attackHitFrame: Double? // the time that attack actual hits
+    var attackDamage: CGFloat?
     
     var startTime = NSDate()
     var cooldown: Double = 0.0
@@ -28,16 +34,24 @@ class Enemy {
         case death
     }
     
-    init(enemy: SKSpriteNode, name: String, moveSpeed: CGFloat) {
+    init(enemy: SKSpriteNode, target: Player) {
         self.enemy = enemy
-        self.name = name
-        self.moveSpeed = moveSpeed
+        self.target = target
     }
     
-    func Move(target: CGPoint) -> CGFloat{
+    func TargetDistance() -> CGFloat{
+        let distance = sqrt(pow((target!.player?.position.x)! - (enemy?.position.x)!, 2) + pow((target!.player?.position.y)! - (enemy?.position.y)!, 2))
+        return distance
+    }
+    
+    func TargetAngle() -> CGFloat{
+        let angle = atan2((target!.player?.position.y)! - (enemy?.position.y)!, (target!.player?.position.x)! - (enemy?.position.x)!)
+        return angle
+    }
+    
+    func Move(){
         //calculations
-        let angle = atan2(target.y - (enemy?.position.y)!, target.x - (enemy?.position.x)!)
-        let distance = sqrt(pow(target.x - (enemy?.position.x)!, 2) + pow(target.y - (enemy?.position.y)!, 2))
+        let angle = TargetAngle()
         
         //velocity
         let newVelocity = CGVector(dx: moveSpeed! * cos(angle), dy: moveSpeed! * sin(angle))
@@ -45,14 +59,13 @@ class Enemy {
         
         //direction
         let direction:CGFloat
-        if(target.x < (enemy?.position.x)!) {
+        if((target!.player?.position.x)! < (enemy?.position.x)!) {
             direction = -1.0
         } else {
             direction = 1.0
         }
         enemy?.xScale = abs(enemy!.xScale) * direction
-        
-        return distance
+        newAction = .walk
     }
     
     func Attack() {
@@ -60,27 +73,31 @@ class Enemy {
             startTime = NSDate()
             newAction = .attack1
             cooldown = 3.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
+                if(TargetDistance() <= attackRange! && currentAction == .attack1){
+                    target?.hit(damage: attackDamage!)
+                }
+            }
         }
     }
     
     func Update(target: CGPoint) {
         //movements
         if(elapsedTime > cooldown) {
-            if Move(target: target) <= 30 {
-                enemy!.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
+            if TargetDistance() <= attackRange! {
+                enemy!.physicsBody!.pinned = true
                 Attack()
+            } else {
+                enemy!.physicsBody!.pinned = false
+                Move()
             }
         }
         // animation
         elapsedTime = startTime.timeIntervalSinceNow * -1
-        if(elapsedTime>cooldown){
-            newAction = .idle
-        }
         
-        // move if velocity > 0
-        let normal = sqrt(pow((enemy!.physicsBody?.velocity.dx)!, 2) + pow((enemy!.physicsBody?.velocity.dy)!, 2))
-        if(normal > 0){
-            newAction = .walk
+        //idle if stop moving
+        if(newAction != .walk && elapsedTime > cooldown){
+            newAction = .idle
         }
         
         //execute
@@ -102,11 +119,6 @@ class Enemy {
                 enemy!.run(SKAction(named: name! + "_death")!)
             }
             currentAction = newAction
-        }
-        
-        //idle if stop moving
-        if(currentAction == .walk && normal == 0){
-            newAction = .idle
         }
     }
     

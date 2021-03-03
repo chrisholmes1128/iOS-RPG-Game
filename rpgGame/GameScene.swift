@@ -26,17 +26,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var touchTime = NSDate()
     
     override func sceneDidLoad() {
+        //resize scene base on device
+        self.scaleMode = .aspectFit
         // Setup joystick
         joystick = self.childNode(withName: "joystick") as? SKSpriteNode
         joystickHandle = joystick?.children.first(where: {$0.name == "joystickHandle"}) as? SKSpriteNode
         joystick?.alpha = 0
         // Setup player
-        player = Player(player: (self.childNode(withName: "player") as? SKSpriteNode)!)
+        player = Player(gameScene: self)
         // Setup skeleton
         for child in self.children {
             if child.name == "skeleton" {
                 if let child = child as? SKSpriteNode {
-                    enemies.append(Enemy(enemy: child, name: "skeleton", moveSpeed: 75.0))
+                    enemies.append(Skeleton(enemy: child, target: self.player!))
                 }
             }
         }
@@ -100,6 +102,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 player!.Attack()
             }
+        } else {
+            //idle
+            player!.newAction = .idle
         }
         
         //reset
@@ -110,19 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
-    
-    func didBegin(_ contact: SKPhysicsContact) {
-        /* Physics contact delegate implementation */
-        /* Get references to the bodies involved in the collision */
-        let contactA:SKPhysicsBody = contact.bodyA
-        let contactB:SKPhysicsBody = contact.bodyB
-        /* Get references to the physics body parent SKSpriteNode */
-        let nodeA = contactA.node as! SKSpriteNode
-        let nodeB = contactB.node as! SKSpriteNode
         
-        print("collusion")
-    }
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         player!.Update()

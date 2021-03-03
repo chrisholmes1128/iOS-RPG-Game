@@ -51,6 +51,8 @@ struct SKViewContainer: UIViewRepresentable {
         view.ignoresSiblingOrder = false
         view.showsFPS = true
         view.showsNodeCount = true
+        //view.showsPhysics = true
+        //view.showsFields = true
 
         return view
     }
