@@ -8,11 +8,14 @@
 import SpriteKit
 
 class Enemy {
+    var gameScene: SKScene?
+    
     //textures
     var enemy: SKSpriteNode?
     var target: Player?
     var healthBar: SKSpriteNode?
     var healthBarWidth: CGFloat?
+    var projectile: SKSpriteNode?
     
     //stats
     var name: String?
@@ -40,7 +43,8 @@ class Enemy {
         case death
     }
     
-    init(enemy: SKSpriteNode, target: Player) {
+    init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+        self.gameScene = gameScene
         self.enemy = enemy
         self.target = target
         self.healthBar = enemy.children.first(where: {$0.name == "health"}) as? SKSpriteNode
@@ -105,6 +109,34 @@ class Enemy {
             }
         }
     }
+    
+    func RangeAttack() {
+        //stats
+        startTime = NSDate()
+        cooldown = attackHitFrame! * 3.0
+
+        //animations
+        currentAction = .attack1
+        enemy!.removeAllActions()
+        enemy!.run(SKAction(named: name! + "_attack1")!)
+        enemy!.physicsBody?.pinned = true
+        
+        projectile?.position = enemy!.position
+        projectile!.physicsBody = SKPhysicsBody(circleOfRadius: projectile!.size.width/2)
+        projectile!.physicsBody?.isDynamic = true
+        projectile!.physicsBody?.usesPreciseCollisionDetection = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
+            gameScene?.addChild(projectile!)
+            let move = SKAction.move(to: (target!.player?.position)!, duration: 1.0)
+            let moveDone = SKAction.removeFromParent()
+            projectile?.run(SKAction.sequence([move, moveDone]))
+        }
+        
+        //hit check
+        
+    }
+
     
     func hit(damage: CGFloat) {
         //stats
@@ -173,7 +205,11 @@ class Enemy {
         // movements
         if(elapsedTime > cooldown) {
             if TargetDistance() <= attackRange! {
-                MeleeAttack()
+                if(attackRange! >= 100){
+                    RangeAttack()
+                } else {
+                    MeleeAttack()
+                }
             } else if !(enemy!.hasActions()) {
                 Idle()
             } else {

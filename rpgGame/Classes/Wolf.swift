@@ -9,8 +9,8 @@ import SpriteKit
 
 class Wolf: Enemy {
     
-    override init(enemy: SKSpriteNode, target: Player) {
-        super.init(enemy: enemy, target: target)
+    override init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+        super.init(gameScene:gameScene, enemy: enemy, target: target)
         name = "wolf"
         radius = 50
         maxHealth = 50

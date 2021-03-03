@@ -10,7 +10,7 @@ import GameplayKit
 import UIKit
 import SwiftUI
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
     // MARK: - Instance Variables
     @Published var gameIsPaused = false {
         didSet {
@@ -28,30 +28,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func sceneDidLoad() {
         //resize scene base on device
         self.scaleMode = .aspectFit
+        
         // Setup joystick
         joystick = self.childNode(withName: "joystick") as? SKSpriteNode
         joystickHandle = joystick?.children.first(where: {$0.name == "joystickHandle"}) as? SKSpriteNode
         joystick?.alpha = 0
+        
         // Setup player
         player = Player(gameScene: self)
-        // Setup skeleton
+        
+        // Setup enemies
         for child in self.children {
             if child.name == "skeleton" {
                 if let child = child as? SKSpriteNode {
-                    //enemies.append(Skeleton(enemy: child, target: self.player!))
+                    enemies.append(Skeleton(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "wolf" {
                 if let child = child as? SKSpriteNode {
-                    enemies.append(Wolf(enemy: child, target: self.player!))
+                    enemies.append(Wolf(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "bat" {
                 if let child = child as? SKSpriteNode {
-                    enemies.append(Bat(enemy: child, target: self.player!))
+                    enemies.append(Bat(gameScene:self, enemy: child, target: self.player!))
+                }
+            } else if child.name == "witch" {
+                if let child = child as? SKSpriteNode {
+                    enemies.append(Witch(gameScene:self, enemy: child, target: self.player!))
                 }
             }
         }
-        //Set physics contact delegate
-        physicsWorld.contactDelegate = self
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -120,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
-        
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         player!.Update()

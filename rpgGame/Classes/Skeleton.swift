@@ -9,8 +9,8 @@ import SpriteKit
 
 class Skeleton: Enemy {
     
-    override init(enemy: SKSpriteNode, target: Player) {
-        super.init(enemy: enemy, target: target)
+    override init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+        super.init(gameScene:gameScene, enemy: enemy, target: target)
         name = "skeleton"
         radius = 100
         maxHealth = 100
