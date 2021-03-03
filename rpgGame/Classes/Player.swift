@@ -99,17 +99,17 @@ class Player {
         }
         
         //velocity
-        let animation = SKAction.moveBy(x: playerDashDistance * cos(angle), y: playerDashDistance * sin(angle), duration: 0.2)
+        let animation = SKAction.moveBy(x: playerDashDistance * cos(angle), y: playerDashDistance * sin(angle), duration: 0.3)
         
         //animation
         startTime = NSDate()
-        cooldown = 0.5
+        cooldown = 0.3
         currentAction = .dash
         player!.removeAllActions()
         player!.run(SKAction(named: "warrior_dash")!)
         player!.run(animation)
         //back to idle after dash
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             Idle()
         }
         

@@ -87,7 +87,7 @@ class Enemy {
         }
     }
     
-    func Attack() {
+    func MeleeAttack() {
         //stats
         startTime = NSDate()
         cooldown = attackHitFrame! * 3.0
@@ -173,7 +173,7 @@ class Enemy {
         // movements
         if(elapsedTime > cooldown) {
             if TargetDistance() <= attackRange! {
-                Attack()
+                MeleeAttack()
             } else if !(enemy!.hasActions()) {
                 Idle()
             } else {
