@@ -99,7 +99,7 @@ class Player {
         }
         
         //velocity
-        let animation = SKAction.moveBy(x: playerDashDistance * cos(angle), y: playerDashDistance * sin(angle), duration: 0.1)
+        let animation = SKAction.moveBy(x: playerDashDistance * cos(angle), y: playerDashDistance * sin(angle), duration: 0.2)
         
         //animation
         startTime = NSDate()
@@ -170,11 +170,17 @@ class Player {
         }
     }
     
-    func hit(damage: CGFloat) {
+    func hit(damage: CGFloat, staggerTimer: Double) {
         //stats
         health! -= damage
         startTime = NSDate()
-        cooldown = 0.5
+        cooldown = staggerTimer
+        
+        // gameover if health < 0
+        if(health! <= 0) {
+            Death()
+            return
+        }
         
         // animation
         player!.removeAllActions()
@@ -184,8 +190,10 @@ class Player {
         // pinned and release after cooldown
         player!.physicsBody?.pinned = true
         DispatchQueue.main.asyncAfter(deadline: .now() + cooldown) { [self] in
+            if(currentAction != .death){
             player!.physicsBody?.pinned = false
             Idle()
+            }
         }
     }
     
@@ -195,26 +203,47 @@ class Player {
         player!.run(SKAction(named: "warrior_idle")!)
     }
     
+    func Death() {
+        //animation and physics
+        if(currentAction != .death){
+            print("death")
+            player!.zPosition = -1
+            player!.removeAllActions()
+            player!.physicsBody?.isResting = true
+            player!.run(SKAction(named: "warrior_death")!)
+        }
+        //status
+        health = 0
+        currentAction = .death
+    }
+    
     func UserInterface() {
         healthBar?.size.width = healthBarWidth! * health! / maxHealth
         staminaBar?.size.width = staminaBarWidth! * stamina! / maxStamina
     }
     
     func Update() {
-        // gameover if health < 0
-        if(health! <= 0) {
-            health = 0
-        }
-        // health & stamina regen
-        if(health! < maxHealth && health! > 0){
-            health! += 0.01
-        }
-        if(stamina! < maxStamina){
-            stamina! += 0.1
-        }
-        
         //UI
         UserInterface()
+        
+        // dead
+        if(health! <= 0) {
+            return
+        }
+        
+        // health & stamina regen
+        if(currentAction == .idle) {
+            if(health! < maxHealth){
+                health! += 0.05
+            }
+            if(stamina! < maxStamina){
+                stamina! += 0.5
+            }
+        } else {
+            if(stamina! < maxStamina){
+                stamina! += 0.1
+            }
+        }
         
         // action cooldown
         elapsedTime = startTime.timeIntervalSinceNow * -1

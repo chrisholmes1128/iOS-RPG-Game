@@ -15,9 +15,10 @@ class Skeleton: Enemy {
         radius = 100
         maxHealth = 100
         health = maxHealth
-        moveSpeed = 75
+        moveSpeed = 50
         attackRange = 70
+        attackStagger = 0.5
         attackHitFrame = 1.0
-        attackDamage = 10
+        attackDamage = 30
     }
 }

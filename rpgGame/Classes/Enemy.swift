@@ -21,6 +21,7 @@ class Enemy {
     var maxHealth: CGFloat?
     var health: CGFloat?
     var attackRange: CGFloat?
+    var attackStagger: Double? // the time length to stagger player
     var attackHitFrame: Double? // the time that attack actual hits
     var attackDamage: CGFloat?
     
@@ -94,16 +95,23 @@ class Enemy {
         
         //hit check
         DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
-            if(TargetDistance() <= attackRange! && currentAction == .attack1){
-                target?.hit(damage: attackDamage!)
+            if(TargetDistance() <= attackRange! && currentAction == .attack1 && target?.currentAction != .death){
+                target?.hit(damage: attackDamage!, staggerTimer: attackStagger!)
             }
         }
     }
     
     func hit(damage: CGFloat) {
+        //stats
         self.health! -= damage
         startTime = NSDate()
         cooldown = 1.0
+        
+        // if death
+        if(health! <= 0) {
+            Death()
+            return
+        }
         
         // animation
         enemy!.removeAllActions()
@@ -130,7 +138,6 @@ class Enemy {
         //status
         health = 0
         currentAction = .death
-        
     }
     
     func Idle() {
@@ -153,9 +160,8 @@ class Enemy {
         //UI
         UserInterface()
 
-        //death
+        //dead
         if(health! <= 0) {
-            Death()
             return
         }
                 
