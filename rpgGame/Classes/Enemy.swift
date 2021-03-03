@@ -16,6 +16,7 @@ class Enemy {
     
     //stats
     var name: String?
+    var radius: CGFloat?
     var moveSpeed: CGFloat?
     var maxHealth: CGFloat?
     var health: CGFloat?
@@ -99,6 +100,25 @@ class Enemy {
         }
     }
     
+    func hit(damage: CGFloat) {
+        self.health! -= damage
+        startTime = NSDate()
+        cooldown = 1.0
+        
+        // animation
+        enemy!.removeAllActions()
+        enemy!.run(SKAction(named: name! + "_hit")!)
+        currentAction = .hit
+        
+        // pinned and release after cooldown
+        enemy!.physicsBody?.pinned = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + cooldown) { [self] in
+            if(currentAction != .death || currentAction == .hit){
+                enemy!.physicsBody?.pinned = false
+            }
+        }
+    }
+    
     func Death() {
         //animation and physics
         if(currentAction != .death){
@@ -129,16 +149,16 @@ class Enemy {
         }
     }
     
-    func Update() {
+    func Update() {        
+        //UI
+        UserInterface()
+
         //death
         if(health! <= 0) {
             Death()
             return
         }
-        
-        //UI
-        UserInterface()
-        
+                
         // movements
         if(elapsedTime > cooldown) {
             if TargetDistance() <= attackRange! {

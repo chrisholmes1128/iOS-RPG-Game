@@ -17,13 +17,15 @@ class Player {
     var staminaBarWidth: CGFloat?
     
     //stats
+    let attackDamage: CGFloat = 20
+    let attackRange: CGFloat = 100
     let playerSpeed: CGFloat = 150.0
     let playerDashDistance: CGFloat = 100.0
-    var maxHealth: CGFloat = 100
+    let maxHealth: CGFloat = 100
     var health: CGFloat?
-    var maxMana: CGFloat = 100
+    let maxMana: CGFloat = 100
     var mana: CGFloat?
-    var maxStamina: CGFloat = 100
+    let maxStamina: CGFloat = 100
     var stamina: CGFloat?
     
     //animations
@@ -86,7 +88,7 @@ class Player {
     
     func Dash(angle: CGFloat, touch: CGPoint, joystick: SKSpriteNode) {
         let staminaCost:CGFloat = 10
-
+        
         // animation lock
         if(elapsedTime < cooldown){
             return
@@ -124,26 +126,47 @@ class Player {
         stamina! -= staminaCost
     }
     
-    func Attack() {
+    func Attack(enemies: [Enemy?]) {
+        //stats
         let comboTimer = 1.3
-        let staminaCost:CGFloat = 20
+        let staminaCost:CGFloat = 10
+        cooldown = 0.8
+        
         //reset if miss combo
         if currentAction == .attack1 && elapsedTime >= comboTimer {
             Idle()
         }
+        
         // melee combo
-        if(currentAction != .attack1 && elapsedTime > cooldown && stamina! >= staminaCost) {
+        if(elapsedTime > cooldown && stamina! >= staminaCost) {
+            //stats
             startTime = NSDate()
-            cooldown = 0.8
-            currentAction = .attack1
             stamina! -= staminaCost
-            player!.run(SKAction(named: "warrior_attack1")!)
-        } else if (currentAction == .attack1 && elapsedTime > cooldown && elapsedTime < comboTimer && stamina! >= staminaCost) {
-            startTime = NSDate()
-            cooldown = 0.8
-            currentAction = .attack2
-            stamina! -= staminaCost
-            player!.run(SKAction(named: "warrior_attack2")!)
+            
+            //animation
+            if(currentAction != .attack1) {
+                currentAction = .attack1
+                player!.run(SKAction(named: "warrior_attack1")!)
+                //hit check
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
+                    for enemy in enemies {
+                        if (enemy!.TargetDistance() <= attackRange && enemy?.currentAction != .death && currentAction == .attack1) {
+                            enemy!.hit(damage: attackDamage)
+                        }
+                    }
+                }
+            } else if (currentAction == .attack1 && elapsedTime < comboTimer) {
+                currentAction = .attack2
+                player!.run(SKAction(named: "warrior_attack2")!)
+                //hit check
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+                    for enemy in enemies {
+                        if (enemy!.TargetDistance() <= attackRange && enemy?.currentAction != .death && currentAction == .attack2) {
+                            enemy!.hit(damage: attackDamage)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -153,7 +176,7 @@ class Player {
         startTime = NSDate()
         cooldown = 0.5
         
-        // animation and sound
+        // animation
         player!.removeAllActions()
         player!.run(SKAction(named: "warrior_hit")!)
         currentAction = .hit

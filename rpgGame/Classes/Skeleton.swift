@@ -12,6 +12,7 @@ class Skeleton: Enemy {
     override init(enemy: SKSpriteNode, target: Player) {
         super.init(enemy: enemy, target: target)
         name = "skeleton"
+        radius = 100
         maxHealth = 100
         health = maxHealth
         moveSpeed = 75

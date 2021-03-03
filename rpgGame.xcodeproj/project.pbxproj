@@ -30,10 +30,15 @@
 		995FEF9F25DD44BE00A1D259 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEF9E25DD44BE00A1D259 /* Player.swift */; };
 		995FEFA425DD454D00A1D259 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEFA325DD454D00A1D259 /* Enemy.swift */; };
 		995FEFAC25DD458300A1D259 /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEFAB25DD458300A1D259 /* Skeleton.swift */; };
+		99A9489225EF4A8F00B71509 /* axe_swing1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489025EF4A8F00B71509 /* axe_swing1.mp3 */; };
+		99A9489325EF4A8F00B71509 /* axe_swing2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489125EF4A8F00B71509 /* axe_swing2.mp3 */; };
+		99A9489C25EF4C8A00B71509 /* sword_swing2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489A25EF4C8A00B71509 /* sword_swing2.mp3 */; };
+		99A9489D25EF4C8A00B71509 /* sword_swing1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489B25EF4C8A00B71509 /* sword_swing1.mp3 */; };
+		99A948A325EF579A00B71509 /* bone_breaks.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A948A125EF579A00B71509 /* bone_breaks.mp3 */; };
+		99A948A425EF579A00B71509 /* bone_impact.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A948A225EF579A00B71509 /* bone_impact.mp3 */; };
 		99E5554F25D362D900AD0CCE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5554E25D362D900AD0CCE /* GameView.swift */; };
 		99E5555C25D3680B00AD0CCE /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5555B25D3680B00AD0CCE /* LevelsView.swift */; };
-		99F000CC25EEEBC100C9EC6A /* skeleton_attack_miss.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99F000CB25EEEBC100C9EC6A /* skeleton_attack_miss.mp3 */; };
-		99F000D125EEF3DC00C9EC6A /* body_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99F000D025EEF3DC00C9EC6A /* body_hit.mp3 */; };
+		99F000D125EEF3DC00C9EC6A /* flesh_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99F000D025EEF3DC00C9EC6A /* flesh_hit.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,10 +88,15 @@
 		995FEF9E25DD44BE00A1D259 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		995FEFA325DD454D00A1D259 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		995FEFAB25DD458300A1D259 /* Skeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
+		99A9489025EF4A8F00B71509 /* axe_swing1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = axe_swing1.mp3; sourceTree = "<group>"; };
+		99A9489125EF4A8F00B71509 /* axe_swing2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = axe_swing2.mp3; sourceTree = "<group>"; };
+		99A9489A25EF4C8A00B71509 /* sword_swing2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sword_swing2.mp3; sourceTree = "<group>"; };
+		99A9489B25EF4C8A00B71509 /* sword_swing1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sword_swing1.mp3; sourceTree = "<group>"; };
+		99A948A125EF579A00B71509 /* bone_breaks.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bone_breaks.mp3; sourceTree = "<group>"; };
+		99A948A225EF579A00B71509 /* bone_impact.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bone_impact.mp3; sourceTree = "<group>"; };
 		99E5554E25D362D900AD0CCE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		99E5555B25D3680B00AD0CCE /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
-		99F000CB25EEEBC100C9EC6A /* skeleton_attack_miss.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = skeleton_attack_miss.mp3; sourceTree = "<group>"; };
-		99F000D025EEF3DC00C9EC6A /* body_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = body_hit.mp3; sourceTree = "<group>"; };
+		99F000D025EEF3DC00C9EC6A /* flesh_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flesh_hit.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,8 +253,13 @@
 		99F000CA25EEEBB700C9EC6A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				99F000D025EEF3DC00C9EC6A /* body_hit.mp3 */,
-				99F000CB25EEEBC100C9EC6A /* skeleton_attack_miss.mp3 */,
+				99A948A125EF579A00B71509 /* bone_breaks.mp3 */,
+				99A948A225EF579A00B71509 /* bone_impact.mp3 */,
+				99A9489B25EF4C8A00B71509 /* sword_swing1.mp3 */,
+				99A9489A25EF4C8A00B71509 /* sword_swing2.mp3 */,
+				99A9489025EF4A8F00B71509 /* axe_swing1.mp3 */,
+				99A9489125EF4A8F00B71509 /* axe_swing2.mp3 */,
+				99F000D025EEF3DC00C9EC6A /* flesh_hit.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -353,12 +368,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9202D92425CCAA10002B2EDF /* Preview Assets.xcassets in Resources */,
+				99A9489D25EF4C8A00B71509 /* sword_swing1.mp3 in Resources */,
+				99A948A425EF579A00B71509 /* bone_impact.mp3 in Resources */,
 				992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */,
-				99F000D125EEF3DC00C9EC6A /* body_hit.mp3 in Resources */,
+				99F000D125EEF3DC00C9EC6A /* flesh_hit.mp3 in Resources */,
+				99A9489C25EF4C8A00B71509 /* sword_swing2.mp3 in Resources */,
+				99A948A325EF579A00B71509 /* bone_breaks.mp3 in Resources */,
+				99A9489325EF4A8F00B71509 /* axe_swing2.mp3 in Resources */,
 				9202D92125CCAA10002B2EDF /* Assets.xcassets in Resources */,
 				995FEF1225DC6B7200A1D259 /* WarriorActions.sks in Resources */,
+				99A9489225EF4A8F00B71509 /* axe_swing1.mp3 in Resources */,
 				995FEF9625DD140800A1D259 /* SkeletonActions.sks in Resources */,
-				99F000CC25EEEBC100C9EC6A /* skeleton_attack_miss.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

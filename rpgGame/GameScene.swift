@@ -97,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if distance >= 1.5{
                 player!.Dash(angle: angle, touch: joystickHandleLocation, joystick: joystick!)
             } else {
-                player!.Attack()
+                player!.Attack(enemies: self.enemies)
             }
         } else {
             //idle
