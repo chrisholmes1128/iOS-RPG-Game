@@ -38,7 +38,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for child in self.children {
             if child.name == "skeleton" {
                 if let child = child as? SKSpriteNode {
-                    enemies.append(Skeleton(enemy: child, target: self.player!))
+                    //enemies.append(Skeleton(enemy: child, target: self.player!))
+                }
+            } else if child.name == "wolf" {
+                if let child = child as? SKSpriteNode {
+                    enemies.append(Wolf(enemy: child, target: self.player!))
                 }
             }
         }

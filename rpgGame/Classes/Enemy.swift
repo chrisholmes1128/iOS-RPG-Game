@@ -77,7 +77,12 @@ class Enemy {
         //animation
         if(currentAction != .walk){
             enemy!.removeAllActions()
+            if(moveSpeed! <= 100){
             enemy!.run(SKAction(named: name! + "_walk")!)
+            } else if (moveSpeed! > 100) {
+                enemy!.run(SKAction(named: name! + "_run")!)
+
+            }
             currentAction = .walk
         }
     }
