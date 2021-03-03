@@ -8,10 +8,14 @@
 import SpriteKit
 
 class Enemy {
+    //textures
     var enemy: SKSpriteNode?
     var target: Player?
-    var name: String?
+    var healthBar: SKSpriteNode?
+    var healthBarWidth: CGFloat?
     
+    //stats
+    var name: String?
     var moveSpeed: CGFloat?
     var maxHealth: CGFloat?
     var health: CGFloat?
@@ -19,11 +23,11 @@ class Enemy {
     var attackHitFrame: Double? // the time that attack actual hits
     var attackDamage: CGFloat?
     
+    //animations
     var startTime = NSDate()
     var cooldown: Double = 0.0
     var elapsedTime: Double = 0.0
-    var newAction = Action.idle
-    var currentAction = Action.hit
+    var currentAction = Action.idle
     enum Action {
         case idle
         case walk
@@ -37,6 +41,9 @@ class Enemy {
     init(enemy: SKSpriteNode, target: Player) {
         self.enemy = enemy
         self.target = target
+        self.healthBar = enemy.children.first(where: {$0.name == "health"}) as? SKSpriteNode
+        self.healthBarWidth = self.healthBar?.size.width
+        self.healthBar?.alpha = 0
     }
     
     func TargetDistance() -> CGFloat{
@@ -52,8 +59,6 @@ class Enemy {
     func Move(){
         //calculations
         let angle = TargetAngle()
-        
-        //velocity
         let newVelocity = CGVector(dx: moveSpeed! * cos(angle), dy: moveSpeed! * sin(angle))
         enemy!.physicsBody!.velocity = newVelocity
         
@@ -65,61 +70,87 @@ class Enemy {
             direction = 1.0
         }
         enemy?.xScale = abs(enemy!.xScale) * direction
-        newAction = .walk
+        enemy!.physicsBody?.pinned = false
+        
+        //animation
+        if(currentAction != .walk){
+            enemy!.removeAllActions()
+            enemy!.run(SKAction(named: name! + "_walk")!)
+            currentAction = .walk
+        }
     }
     
     func Attack() {
-        if(elapsedTime > cooldown) {
-            startTime = NSDate()
-            newAction = .attack1
-            cooldown = 3.0
-            DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
-                if(TargetDistance() <= attackRange! && currentAction == .attack1){
-                    target?.hit(damage: attackDamage!)
-                }
+        //stats
+        startTime = NSDate()
+        cooldown = attackHitFrame! * 3.0
+
+        //animations
+        currentAction = .attack1
+        enemy!.removeAllActions()
+        enemy!.run(SKAction(named: name! + "_attack1")!)
+        enemy!.physicsBody?.pinned = true
+        
+        //hit check
+        DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
+            if(TargetDistance() <= attackRange! && currentAction == .attack1){
+                target?.hit(damage: attackDamage!)
             }
         }
     }
     
-    func Update(target: CGPoint) {
-        //movements
+    func Death() {
+        //animation and physics
+        if(currentAction != .death){
+            enemy!.zPosition = -1
+            enemy!.removeAllActions()
+            enemy!.physicsBody?.isResting = true
+            enemy!.run(SKAction(named: name! + "_death")!)
+        }
+        //status
+        health = 0
+        currentAction = .death
+        
+    }
+    
+    func Idle() {
+        //animation
+        enemy!.removeAllActions()
+        enemy!.run(SKAction(named: name! + "_idle")!)
+    }
+    
+    func UserInterface() {
+        //health bar
+        if(health! < maxHealth!){
+            healthBar?.alpha = 1
+            healthBar?.size.width = healthBarWidth! * health! / maxHealth!
+        } else {
+            healthBar?.alpha = 0
+        }
+    }
+    
+    func Update() {
+        //death
+        if(health! <= 0) {
+            Death()
+            return
+        }
+        
+        //UI
+        UserInterface()
+        
+        // movements
         if(elapsedTime > cooldown) {
             if TargetDistance() <= attackRange! {
-                enemy!.physicsBody!.pinned = true
                 Attack()
+            } else if !(enemy!.hasActions()) {
+                Idle()
             } else {
-                enemy!.physicsBody!.pinned = false
                 Move()
             }
         }
-        // animation
+        
+        // animation cooldown timer
         elapsedTime = startTime.timeIntervalSinceNow * -1
-        
-        //idle if stop moving
-        if(newAction != .walk && elapsedTime > cooldown){
-            newAction = .idle
-        }
-        
-        //execute
-        if newAction != currentAction{
-            switch newAction {
-            case .idle:
-                enemy!.run(SKAction(named: name! + "_idle")!)
-            case .walk:
-                enemy!.run(SKAction(named: name! + "_walk")!)
-            case .run:
-                enemy!.run(SKAction(named: name! + "_run")!)
-            case .hit:
-                enemy!.run(SKAction(named: name! + "_hit")!)
-            case .attack1:
-                enemy!.run(SKAction(named: name! + "_attack1")!)
-            case .attack2:
-                enemy!.run(SKAction(named: name! + "_attack2")!)
-            case .death:
-                enemy!.run(SKAction(named: name! + "_death")!)
-            }
-            currentAction = newAction
-        }
     }
-    
 }

@@ -94,17 +94,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //character movement
         if elapsedTime < 0.2 {
-            //Dash
             if distance >= 1.5{
                 player!.Dash(angle: angle, touch: joystickHandleLocation, joystick: joystick!)
-                
-                //Attack
             } else {
                 player!.Attack()
             }
         } else {
             //idle
-            player!.newAction = .idle
+            player!.Idle()
         }
         
         //reset
@@ -119,9 +116,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         player!.Update()
+        
         for enemy in enemies {
-            enemy?.Update(target: player!.player!.position)
+            enemy?.Update()
         }
+        
         updateCamera()
     }
     
