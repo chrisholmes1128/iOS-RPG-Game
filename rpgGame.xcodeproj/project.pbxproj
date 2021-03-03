@@ -25,13 +25,27 @@
 		92F1863D25D208E300F46216 /* GameCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863C25D208E300F46216 /* GameCenterView.swift */; };
 		992FA56D25D34E8A00C72FCB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FA56A25D34E8A00C72FCB /* GameScene.swift */; };
 		992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 992FA56C25D34E8A00C72FCB /* GameScene.sks */; };
+		9954889925EF8DDD00C518B8 /* WitchAction.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9954889825EF8DDD00C518B8 /* WitchAction.sks */; };
+		9954889E25EF8E6900C518B8 /* Witch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9954889D25EF8E6900C518B8 /* Witch.swift */; };
+		995488A325EF922300C518B8 /* ProjectileAction.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995488A225EF922300C518B8 /* ProjectileAction.sks */; };
 		995FEF1225DC6B7200A1D259 /* WarriorActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995FEF1125DC6B7200A1D259 /* WarriorActions.sks */; };
 		995FEF9625DD140800A1D259 /* SkeletonActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995FEF9525DD140800A1D259 /* SkeletonActions.sks */; };
 		995FEF9F25DD44BE00A1D259 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEF9E25DD44BE00A1D259 /* Player.swift */; };
 		995FEFA425DD454D00A1D259 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEFA325DD454D00A1D259 /* Enemy.swift */; };
 		995FEFAC25DD458300A1D259 /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEFAB25DD458300A1D259 /* Skeleton.swift */; };
+		99A9489225EF4A8F00B71509 /* axe_swing1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489025EF4A8F00B71509 /* axe_swing1.mp3 */; };
+		99A9489325EF4A8F00B71509 /* axe_swing2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489125EF4A8F00B71509 /* axe_swing2.mp3 */; };
+		99A9489C25EF4C8A00B71509 /* sword_swing2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489A25EF4C8A00B71509 /* sword_swing2.mp3 */; };
+		99A9489D25EF4C8A00B71509 /* sword_swing1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A9489B25EF4C8A00B71509 /* sword_swing1.mp3 */; };
+		99A948A325EF579A00B71509 /* bone_breaks.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A948A125EF579A00B71509 /* bone_breaks.mp3 */; };
+		99A948A425EF579A00B71509 /* bone_impact.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99A948A225EF579A00B71509 /* bone_impact.mp3 */; };
+		99A948A925EF73BC00B71509 /* Wolf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A948A825EF73BC00B71509 /* Wolf.swift */; };
+		99A948AE25EF740500B71509 /* WolfActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 99A948AD25EF740500B71509 /* WolfActions.sks */; };
+		99A948B325EF87BC00B71509 /* BatActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 99A948B225EF87BC00B71509 /* BatActions.sks */; };
+		99A948B825EF87C700B71509 /* Bat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A948B725EF87C700B71509 /* Bat.swift */; };
 		99E5554F25D362D900AD0CCE /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5554E25D362D900AD0CCE /* GameView.swift */; };
 		99E5555C25D3680B00AD0CCE /* LevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E5555B25D3680B00AD0CCE /* LevelsView.swift */; };
+		99F000D125EEF3DC00C9EC6A /* flesh_hit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 99F000D025EEF3DC00C9EC6A /* flesh_hit.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,13 +90,27 @@
 		92F1863C25D208E300F46216 /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
 		992FA56A25D34E8A00C72FCB /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		992FA56C25D34E8A00C72FCB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		9954889825EF8DDD00C518B8 /* WitchAction.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WitchAction.sks; sourceTree = "<group>"; };
+		9954889D25EF8E6900C518B8 /* Witch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Witch.swift; sourceTree = "<group>"; };
+		995488A225EF922300C518B8 /* ProjectileAction.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ProjectileAction.sks; sourceTree = "<group>"; };
 		995FEF1125DC6B7200A1D259 /* WarriorActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WarriorActions.sks; sourceTree = "<group>"; };
 		995FEF9525DD140800A1D259 /* SkeletonActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SkeletonActions.sks; sourceTree = "<group>"; };
 		995FEF9E25DD44BE00A1D259 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		995FEFA325DD454D00A1D259 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		995FEFAB25DD458300A1D259 /* Skeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
+		99A9489025EF4A8F00B71509 /* axe_swing1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = axe_swing1.mp3; sourceTree = "<group>"; };
+		99A9489125EF4A8F00B71509 /* axe_swing2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = axe_swing2.mp3; sourceTree = "<group>"; };
+		99A9489A25EF4C8A00B71509 /* sword_swing2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sword_swing2.mp3; sourceTree = "<group>"; };
+		99A9489B25EF4C8A00B71509 /* sword_swing1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sword_swing1.mp3; sourceTree = "<group>"; };
+		99A948A125EF579A00B71509 /* bone_breaks.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bone_breaks.mp3; sourceTree = "<group>"; };
+		99A948A225EF579A00B71509 /* bone_impact.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bone_impact.mp3; sourceTree = "<group>"; };
+		99A948A825EF73BC00B71509 /* Wolf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wolf.swift; sourceTree = "<group>"; };
+		99A948AD25EF740500B71509 /* WolfActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WolfActions.sks; sourceTree = "<group>"; };
+		99A948B225EF87BC00B71509 /* BatActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BatActions.sks; sourceTree = "<group>"; };
+		99A948B725EF87C700B71509 /* Bat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bat.swift; sourceTree = "<group>"; };
 		99E5554E25D362D900AD0CCE /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		99E5555B25D3680B00AD0CCE /* LevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsView.swift; sourceTree = "<group>"; };
+		99F000D025EEF3DC00C9EC6A /* flesh_hit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = flesh_hit.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +231,7 @@
 		992FA56825D34E0B00C72FCB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				99F000CA25EEEBB700C9EC6A /* Sounds */,
 				9202D92025CCAA10002B2EDF /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -221,6 +250,10 @@
 			children = (
 				995FEF1125DC6B7200A1D259 /* WarriorActions.sks */,
 				995FEF9525DD140800A1D259 /* SkeletonActions.sks */,
+				99A948AD25EF740500B71509 /* WolfActions.sks */,
+				99A948B225EF87BC00B71509 /* BatActions.sks */,
+				9954889825EF8DDD00C518B8 /* WitchAction.sks */,
+				995488A225EF922300C518B8 /* ProjectileAction.sks */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -231,8 +264,25 @@
 				995FEF9E25DD44BE00A1D259 /* Player.swift */,
 				995FEFA325DD454D00A1D259 /* Enemy.swift */,
 				995FEFAB25DD458300A1D259 /* Skeleton.swift */,
+				99A948A825EF73BC00B71509 /* Wolf.swift */,
+				99A948B725EF87C700B71509 /* Bat.swift */,
+				9954889D25EF8E6900C518B8 /* Witch.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		99F000CA25EEEBB700C9EC6A /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				99A948A125EF579A00B71509 /* bone_breaks.mp3 */,
+				99A948A225EF579A00B71509 /* bone_impact.mp3 */,
+				99A9489B25EF4C8A00B71509 /* sword_swing1.mp3 */,
+				99A9489A25EF4C8A00B71509 /* sword_swing2.mp3 */,
+				99A9489025EF4A8F00B71509 /* axe_swing1.mp3 */,
+				99A9489125EF4A8F00B71509 /* axe_swing2.mp3 */,
+				99F000D025EEF3DC00C9EC6A /* flesh_hit.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,10 +389,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				9202D92425CCAA10002B2EDF /* Preview Assets.xcassets in Resources */,
+				99A9489D25EF4C8A00B71509 /* sword_swing1.mp3 in Resources */,
+				995488A325EF922300C518B8 /* ProjectileAction.sks in Resources */,
+				99A948A425EF579A00B71509 /* bone_impact.mp3 in Resources */,
 				992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */,
+				99F000D125EEF3DC00C9EC6A /* flesh_hit.mp3 in Resources */,
+				99A948AE25EF740500B71509 /* WolfActions.sks in Resources */,
+				99A9489C25EF4C8A00B71509 /* sword_swing2.mp3 in Resources */,
+				99A948B325EF87BC00B71509 /* BatActions.sks in Resources */,
+				99A948A325EF579A00B71509 /* bone_breaks.mp3 in Resources */,
+				99A9489325EF4A8F00B71509 /* axe_swing2.mp3 in Resources */,
 				9202D92125CCAA10002B2EDF /* Assets.xcassets in Resources */,
 				995FEF1225DC6B7200A1D259 /* WarriorActions.sks in Resources */,
+				99A9489225EF4A8F00B71509 /* axe_swing1.mp3 in Resources */,
 				995FEF9625DD140800A1D259 /* SkeletonActions.sks in Resources */,
+				9954889925EF8DDD00C518B8 /* WitchAction.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +435,7 @@
 				9202D95A25CCAA26002B2EDF /* BackgroundView.swift in Sources */,
 				9202D95225CCAA1E002B2EDF /* ViewRouter.swift in Sources */,
 				9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */,
+				99A948A925EF73BC00B71509 /* Wolf.swift in Sources */,
 				9202D95425CCAA1E002B2EDF /* MotherView.swift in Sources */,
 				995FEF9F25DD44BE00A1D259 /* Player.swift in Sources */,
 				9202D91F25CCAA0F002B2EDF /* ContentView.swift in Sources */,
@@ -381,6 +443,8 @@
 				9202D91D25CCAA0F002B2EDF /* rpgGameApp.swift in Sources */,
 				9202D95025CCAA1E002B2EDF /* TitleView.swift in Sources */,
 				9202D95125CCAA1E002B2EDF /* OptionsView.swift in Sources */,
+				99A948B825EF87C700B71509 /* Bat.swift in Sources */,
+				9954889E25EF8E6900C518B8 /* Witch.swift in Sources */,
 				92F1863825D2045300F46216 /* GameCenter.swift in Sources */,
 				99E5554F25D362D900AD0CCE /* GameView.swift in Sources */,
 				995FEFA425DD454D00A1D259 /* Enemy.swift in Sources */,
