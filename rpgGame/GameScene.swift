@@ -126,6 +126,18 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        /* Physics contact delegate implementation */
+        /* Get references to the bodies involved in the collision */
+        let contactA:SKPhysicsBody = contact.bodyA
+        let contactB:SKPhysicsBody = contact.bodyB
+        /* Get references to the physics body parent SKSpriteNode */
+        let nodeA = contactA.node as! SKSpriteNode
+        let nodeB = contactB.node as! SKSpriteNode
+        
+        print("collision")
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         player!.Update()

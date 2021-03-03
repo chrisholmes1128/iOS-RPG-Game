@@ -30,8 +30,8 @@ struct GameView: View {
                         .colorInvert()
                         .frame(width: 40, height: 40, alignment: .trailing)
                 }
-            }.padding(.bottom, 310)
-            .padding(.leading, 10)
+            }.padding(.bottom, 740)
+            .padding(.leading, 980)
         }
     }
 }

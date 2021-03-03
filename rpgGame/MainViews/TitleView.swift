@@ -17,15 +17,14 @@ struct TitleView: View {
         ZStack {
             VStack {
                 if titleShowing {
-                    VStack(spacing: 7){
+                    VStack(spacing: 8){
                         Spacer()
                         
-                        Text("Pirate Invaders")
-                            .font(.system(size: 45, weight: .heavy))
+                        Text("Super Slash")
+                            .font(.system(size: 40, weight: .heavy))
                             .foregroundColor(.white)
                             .transition(.move(edge: .trailing))
-                        
-                        Spacer()
+                            .padding(.bottom, 10)
                         
                         Text("START")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
@@ -41,7 +40,8 @@ struct TitleView: View {
                                     viewRouter.currentPage = .LevelsView
                                 }
                             }
-                        Text("OPTIONS")
+                        
+                        Text("SETTINGS")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                             .foregroundColor(.white)
                             .frame(width: 120, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
