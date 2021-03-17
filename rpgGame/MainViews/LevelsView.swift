@@ -15,7 +15,7 @@ struct LevelsView: View {
             BackgroundView()
             
             VStack{
-                Text("Level 1")
+                Text("LEVEL 1")
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 300, height: 30, alignment: .center)
@@ -27,7 +27,7 @@ struct LevelsView: View {
                         viewRouter.currentPage = .GameView
                     }
                 
-                Text("Level 2")
+                Text("LEVEL 2")
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 300, height: 30, alignment: .center)
@@ -38,7 +38,7 @@ struct LevelsView: View {
                     .onTapGesture {
                     }
                 
-                Text("Level 3")
+                Text("LEVEL 3")
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 300, height: 30, alignment: .center)
@@ -47,6 +47,17 @@ struct LevelsView: View {
                     .border(Color.white, width: 3)
                     .cornerRadius(8)
                     .onTapGesture {
+                    }
+                Text("BACK")
+                    .font(.system(size: 22, weight: .heavy, design: .rounded))
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 30, alignment: .center)
+                    .transition(.move(edge: .leading))
+                    .padding()
+                    .border(Color.white, width: 3)
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        viewRouter.currentPage = .homeScreenView
                     }
             }
         }
