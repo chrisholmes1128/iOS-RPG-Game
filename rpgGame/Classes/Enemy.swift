@@ -131,6 +131,7 @@ class Enemy {
             let move = SKAction.move(to: (target!.player?.position)!, duration: 1.0)
             let moveDone = SKAction.removeFromParent()
             projectile?.run(SKAction.sequence([move, moveDone]))
+            projectile!.run(SKAction(named: "fireball_black")!)
         }
         
         //hit check

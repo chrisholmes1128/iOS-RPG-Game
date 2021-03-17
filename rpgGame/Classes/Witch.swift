@@ -12,8 +12,8 @@ class Witch: Enemy {
     override init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
         super.init(gameScene:gameScene, enemy: enemy, target: target)
         name = "witch"
-        radius = 70
-        maxHealth = 400
+        radius = 100
+        maxHealth = 100
         health = maxHealth
         moveSpeed = 50
         attackRange = 500
