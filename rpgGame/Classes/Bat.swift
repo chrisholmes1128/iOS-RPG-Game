@@ -20,5 +20,6 @@ class Bat: Enemy {
         attackStagger = 0.1
         attackHitFrame = 0.6
         attackDamage = 5
+        aggroRange = 400
     }
 }

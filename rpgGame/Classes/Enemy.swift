@@ -30,6 +30,8 @@ class Enemy {
     var projectileName: String?
     var projectileSpeed: CGFloat?
     var projectileLifeTime: Double?
+    var aggroRange: CGFloat?
+    var aggroed: Bool = false
     
     //animations
     var startTime = NSDate()
@@ -235,9 +237,14 @@ class Enemy {
                 }
             } else if !(enemy!.hasActions()) {
                 Idle()
-            } else {
+            } else if(aggroed){
                 Move()
             }
+        }
+        
+        //aggro if play in range
+        if(TargetDistance() <= aggroRange! && !aggroed){
+            aggroed = true
         }
         
         // animation cooldown timer
