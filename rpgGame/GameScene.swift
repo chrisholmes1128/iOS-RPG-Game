@@ -10,7 +10,7 @@ import GameplayKit
 import UIKit
 import SwiftUI
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Instance Variables
     @Published var gameIsPaused = false {
         didSet {
@@ -29,6 +29,9 @@ class GameScene: SKScene {
         //resize scene base on device
         self.scaleMode = .aspectFit
         
+        //physics world
+        physicsWorld.contactDelegate = self
+        
         // Setup joystick
         joystick = self.childNode(withName: "joystick") as? SKSpriteNode
         joystickHandle = joystick?.children.first(where: {$0.name == "joystickHandle"}) as? SKSpriteNode
@@ -41,19 +44,40 @@ class GameScene: SKScene {
         for child in self.children {
             if child.name == "skeleton" {
                 if let child = child as? SKSpriteNode {
-                    enemies.append(Skeleton(gameScene:self, enemy: child, target: self.player!))
+                    //enemies.append(Skeleton(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "wolf" {
                 if let child = child as? SKSpriteNode {
-                    enemies.append(Wolf(gameScene:self, enemy: child, target: self.player!))
+                    //enemies.append(Wolf(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "bat" {
                 if let child = child as? SKSpriteNode {
-                    enemies.append(Bat(gameScene:self, enemy: child, target: self.player!))
+                    //enemies.append(Bat(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "witch" {
                 if let child = child as? SKSpriteNode {
                     enemies.append(Witch(gameScene:self, enemy: child, target: self.player!))
+                }
+            }
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        // Handle the collitions in each nodes class
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+        
+        projectileCollision(nodeA: nodeA, nodeB: nodeB)
+    }
+    
+    func projectileCollision(nodeA: SKNode, nodeB: SKNode) {
+        if nodeA.name == "player" {
+            for enemy in enemies {
+                if enemy?.projectileName == nodeB.name {
+                    player!.hit(damage: enemy!.attackDamage!, staggerTimer: enemy!.attackStagger!)
+                    if player?.currentAction != .death {
+                        nodeB.removeFromParent()
+                    }
                 }
             }
         }
@@ -124,18 +148,6 @@ class GameScene: SKScene {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    func didBegin(_ contact: SKPhysicsContact) {
-        /* Physics contact delegate implementation */
-        /* Get references to the bodies involved in the collision */
-        let contactA:SKPhysicsBody = contact.bodyA
-        let contactB:SKPhysicsBody = contact.bodyB
-        /* Get references to the physics body parent SKSpriteNode */
-        let nodeA = contactA.node as! SKSpriteNode
-        let nodeB = contactB.node as! SKSpriteNode
-        
-        print("collision")
     }
     
     override func update(_ currentTime: TimeInterval) {

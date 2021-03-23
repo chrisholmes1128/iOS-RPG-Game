@@ -15,7 +15,6 @@ class Enemy {
     var target: Player?
     var healthBar: SKSpriteNode?
     var healthBarWidth: CGFloat?
-    var projectile: SKSpriteNode?
     
     //stats
     var name: String?
@@ -27,6 +26,10 @@ class Enemy {
     var attackStagger: Double? // the time length to stagger player
     var attackHitFrame: Double? // the time that attack actual hits
     var attackDamage: CGFloat?
+    var attackSpeed: CGFloat?
+    var projectileName: String?
+    var projectileSpeed: CGFloat?
+    var projectileLifeTime: Double?
     
     //animations
     var startTime = NSDate()
@@ -82,10 +85,10 @@ class Enemy {
         if(currentAction != .walk){
             enemy!.removeAllActions()
             if(moveSpeed! <= 100){
-            enemy!.run(SKAction(named: name! + "_walk")!)
+                enemy!.run(SKAction(named: name! + "_walk")!)
             } else if (moveSpeed! > 100) {
                 enemy!.run(SKAction(named: name! + "_run")!)
-
+                
             }
             currentAction = .walk
         }
@@ -95,7 +98,7 @@ class Enemy {
         //stats
         startTime = NSDate()
         cooldown = attackHitFrame! * 3.0
-
+        
         //animations
         currentAction = .attack1
         enemy!.removeAllActions()
@@ -112,38 +115,54 @@ class Enemy {
     
     func RangeAttack() {
         //stats
+        let projectile = SKSpriteNode(imageNamed: projectileName!)
+        projectile.name = projectileName
         startTime = NSDate()
         cooldown = attackHitFrame! * 3.0
-
+        
         //animations
         currentAction = .attack1
         enemy!.removeAllActions()
         enemy!.run(SKAction(named: name! + "_attack1")!)
         enemy!.physicsBody?.pinned = true
         
-        projectile?.position = enemy!.position
-        projectile!.physicsBody = SKPhysicsBody(circleOfRadius: projectile!.size.width/2)
-        projectile!.physicsBody?.isDynamic = true
-        projectile!.physicsBody?.usesPreciseCollisionDetection = true
-
+        //calculations
+        let angle = TargetAngle()
+        let newVelocity = CGVector(dx: projectileSpeed! * cos(angle), dy: projectileSpeed! * sin(angle))
+        
+        // physics
+        projectile.position = enemy!.position
+        projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/10)
+        projectile.anchorPoint = CGPoint(x: 0.1, y: 0.5)
+        projectile.physicsBody?.isDynamic = true
+        projectile.physicsBody?.usesPreciseCollisionDetection = true
+        projectile.physicsBody?.contactTestBitMask = 0x00000001
+        
+        projectile.physicsBody!.velocity = newVelocity
+        let rotationAction = SKAction.rotate(toAngle: angle + .pi, duration: 0)
+        projectile.run(rotationAction)
+        let scaleAction = SKAction.scale(to: CGFloat(2), duration: 0)
+        projectile.run(scaleAction)
+        
+        // delay functions
+        // shot projectile fits animation time
         DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
-            gameScene?.addChild(projectile!)
-            let move = SKAction.move(to: (target!.player?.position)!, duration: 1.0)
-            let moveDone = SKAction.removeFromParent()
-            projectile?.run(SKAction.sequence([move, moveDone]))
-            projectile!.run(SKAction(named: "fireball_black")!)
+            gameScene?.addChild(projectile)
+            projectile.run(SKAction(named: projectileName!)!)
+            
+            //remove projectile after life time
+            DispatchQueue.main.asyncAfter(deadline: .now() + projectileLifeTime!) {
+                projectile.removeFromParent()
+            }
         }
-        
-        //hit check
-        
     }
-
+    
     
     func hit(damage: CGFloat) {
         //stats
         self.health! -= damage
         startTime = NSDate()
-        cooldown = 1.0
+        cooldown = 1.5
         
         // if death
         if(health! <= 0) {
@@ -197,12 +216,12 @@ class Enemy {
     func Update() {        
         //UI
         UserInterface()
-
+        
         //dead
         if(health! <= 0) {
             return
         }
-                
+        
         // movements
         if(elapsedTime > cooldown) {
             if TargetDistance() <= attackRange! {
