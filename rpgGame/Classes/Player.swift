@@ -150,7 +150,7 @@ class Player {
                 //hit check
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [self] in
                     for enemy in enemies {
-                        if (enemy!.TargetDistance() <= attackRange && enemy?.currentAction != .death && currentAction == .attack1) {
+                        if (enemy!.TargetDistance() <= attackRange && enemy?.currentAnimation != .death && currentAction == .attack1) {
                             enemy!.hit(damage: attackDamage)
                         }
                     }
@@ -161,7 +161,7 @@ class Player {
                 //hit check
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
                     for enemy in enemies {
-                        if (enemy!.TargetDistance() <= attackRange && enemy?.currentAction != .death && currentAction == .attack2) {
+                        if (enemy!.TargetDistance() <= attackRange && enemy?.currentAnimation != .death && currentAction == .attack2) {
                             enemy!.hit(damage: attackDamage)
                         }
                     }
@@ -206,7 +206,6 @@ class Player {
     func Death() {
         //animation and physics
         if(currentAction != .death){
-            print("death")
             player!.zPosition = -1
             player!.removeAllActions()
             player!.physicsBody?.isResting = true
@@ -215,6 +214,9 @@ class Player {
         //status
         health = 0
         currentAction = .death
+        
+        //update gui
+        UserInterface()
     }
     
     func UserInterface() {

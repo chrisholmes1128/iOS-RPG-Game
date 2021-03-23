@@ -18,12 +18,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    //nodes
     var joystick: SKSpriteNode?
     var joystickHandle: SKSpriteNode?
     var player:Player?
     var enemies: [Enemy?] = []
     
+    //stats
     var touchTime = NSDate()
+    var currentGameState = gameState.playing
+    enum gameState {
+        case gameOver
+        case paused
+        case playing
+    }
     
     override func sceneDidLoad() {
         //resize scene base on device
@@ -44,15 +52,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for child in self.children {
             if child.name == "skeleton" {
                 if let child = child as? SKSpriteNode {
-                    //enemies.append(Skeleton(gameScene:self, enemy: child, target: self.player!))
+                    enemies.append(Skeleton(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "wolf" {
                 if let child = child as? SKSpriteNode {
-                    //enemies.append(Wolf(gameScene:self, enemy: child, target: self.player!))
+                    enemies.append(Wolf(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "bat" {
                 if let child = child as? SKSpriteNode {
-                    //enemies.append(Bat(gameScene:self, enemy: child, target: self.player!))
+                    enemies.append(Bat(gameScene:self, enemy: child, target: self.player!))
                 }
             } else if child.name == "witch" {
                 if let child = child as? SKSpriteNode {
@@ -74,8 +82,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if nodeA.name == "player" {
             for enemy in enemies {
                 if enemy?.projectileName == nodeB.name {
-                    player!.hit(damage: enemy!.attackDamage!, staggerTimer: enemy!.attackStagger!)
                     if player?.currentAction != .death {
+                        player!.hit(damage: enemy!.attackDamage!, staggerTimer: enemy!.attackStagger!)
                         nodeB.removeFromParent()
                     }
                 }
@@ -150,15 +158,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
+    func gameOver() {
+        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+        myLabel.text = "GameOver!"
+        myLabel.fontSize = 65
+        myLabel.position = camera!.position
+        self.addChild(myLabel)
+        currentGameState = .gameOver
+        physicsWorld.speed = 0
+        isUserInteractionEnabled = false
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        player!.Update()
         
-        for enemy in enemies {
-            enemy?.Update()
+        // gameover
+        if currentGameState == .gameOver {
+            return
         }
         
-        updateCamera()
+        if player?.currentAction == .death {
+            gameOver()
+        }
+        
+        // if game is not paused
+        if currentGameState != .paused {
+            player!.Update()
+            
+            for enemy in enemies {
+                enemy?.Update()
+            }
+            
+            updateCamera()
+        }
     }
     
     func updateCamera() {

@@ -35,8 +35,8 @@ class Enemy {
     var startTime = NSDate()
     var cooldown: Double = 0.0
     var elapsedTime: Double = 0.0
-    var currentAction = Action.idle
-    enum Action {
+    var currentAnimation = Animation.idle
+    enum Animation {
         case idle
         case walk
         case run
@@ -82,7 +82,7 @@ class Enemy {
         enemy!.physicsBody?.pinned = false
         
         //animation
-        if(currentAction != .walk){
+        if(currentAnimation != .walk){
             enemy!.removeAllActions()
             if(moveSpeed! <= 100){
                 enemy!.run(SKAction(named: name! + "_walk")!)
@@ -90,7 +90,7 @@ class Enemy {
                 enemy!.run(SKAction(named: name! + "_run")!)
                 
             }
-            currentAction = .walk
+            currentAnimation = .walk
         }
     }
     
@@ -100,20 +100,23 @@ class Enemy {
         cooldown = attackHitFrame! * 3.0
         
         //animations
-        currentAction = .attack1
+        currentAnimation = .attack1
         enemy!.removeAllActions()
         enemy!.run(SKAction(named: name! + "_attack1")!)
         enemy!.physicsBody?.pinned = true
         
         //hit check
         DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
-            if(TargetDistance() <= attackRange! && currentAction == .attack1 && target?.currentAction != .death){
+            if(TargetDistance() <= attackRange! && currentAnimation == .attack1 && target?.currentAction != .death){
                 target?.hit(damage: attackDamage!, staggerTimer: attackStagger!)
             }
         }
     }
     
     func RangeAttack() {
+        //move once to relocate the direction
+        Move()
+        
         //stats
         let projectile = SKSpriteNode(imageNamed: projectileName!)
         projectile.name = projectileName
@@ -121,7 +124,7 @@ class Enemy {
         cooldown = attackHitFrame! * 3.0
         
         //animations
-        currentAction = .attack1
+        currentAnimation = .attack1
         enemy!.removeAllActions()
         enemy!.run(SKAction(named: name! + "_attack1")!)
         enemy!.physicsBody?.pinned = true
@@ -173,12 +176,12 @@ class Enemy {
         // animation
         enemy!.removeAllActions()
         enemy!.run(SKAction(named: name! + "_hit")!)
-        currentAction = .hit
+        currentAnimation = .hit
         
         // pinned and release after cooldown
         enemy!.physicsBody?.pinned = true
         DispatchQueue.main.asyncAfter(deadline: .now() + cooldown) { [self] in
-            if(currentAction != .death || currentAction == .hit){
+            if(currentAnimation != .death || currentAnimation == .hit){
                 enemy!.physicsBody?.pinned = false
             }
         }
@@ -186,7 +189,7 @@ class Enemy {
     
     func Death() {
         //animation and physics
-        if(currentAction != .death){
+        if(currentAnimation != .death){
             enemy!.zPosition = -1
             enemy!.removeAllActions()
             enemy!.physicsBody?.isResting = true
@@ -194,7 +197,7 @@ class Enemy {
         }
         //status
         health = 0
-        currentAction = .death
+        currentAnimation = .death
     }
     
     func Idle() {
