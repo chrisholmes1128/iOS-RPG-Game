@@ -41,8 +41,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         // Setup joystick
-        joystick = self.childNode(withName: "joystick") as? SKSpriteNode
-        joystickHandle = joystick?.children.first(where: {$0.name == "joystickHandle"}) as? SKSpriteNode
+        joystick = self.childNode(withName: "/camera/joystick") as? SKSpriteNode
+        joystickHandle = self.childNode(withName: "/camera/joystick/joystickHandle") as? SKSpriteNode
         joystick?.alpha = 0
         
         // Setup player
@@ -94,7 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-        let location = touch.location(in: self)
+        let location = touch.location(in: self.camera!)
         
         //joystick
         joystick?.position = location
@@ -106,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-        let location = touch.location(in: self)
+        let location = touch.location(in: self.camera!)
         let joystickHandleLocation = touch.location(in: joystick!)
         
         //calculations
@@ -194,6 +194,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateCamera() {
-        //camera?.position = player!.position
+        camera?.position = (player?.player!.position)!
     }
 }

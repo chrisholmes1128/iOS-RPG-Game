@@ -50,10 +50,9 @@ class Player {
         self.stamina = self.maxStamina
         
         //UI
-        let healthBarUI = gameScene.childNode(withName: "healthBar") as? SKSpriteNode
-        healthBar = healthBarUI?.children.first(where: {$0.name == "health"}) as? SKSpriteNode
+        healthBar = gameScene.childNode(withName: "/camera/healthBar/health") as? SKSpriteNode
         healthBarWidth = healthBar?.size.width
-        staminaBar = healthBarUI?.children.first(where: {$0.name == "stamina"}) as? SKSpriteNode
+        staminaBar = gameScene.childNode(withName: "/camera/healthBar/stamina") as? SKSpriteNode
         staminaBarWidth = staminaBar?.size.width
         
         //animation
