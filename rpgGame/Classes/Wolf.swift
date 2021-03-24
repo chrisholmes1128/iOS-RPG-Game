@@ -22,4 +22,10 @@ class Wolf: Enemy {
         attackDamage = 5
         aggroRange = 800
     }
+    
+    override func setAggroState(state: Bool) {
+        super.setAggroState(state: state)
+        let sfx = SKAction.playSoundFileNamed("wolf_aggroed.mp3", waitForCompletion: false)
+        enemy!.run(sfx)
+    }
 }

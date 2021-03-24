@@ -23,6 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var joystickHandle: SKSpriteNode?
     var player:Player?
     var enemies: [Enemy?] = []
+    let music = SKAudioNode(fileNamed: "Everlasting-Snow.mp3")
     
     //stats
     var touchTime = NSDate()
@@ -39,6 +40,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //physics world
         physicsWorld.contactDelegate = self
+        
+        // background music
+        addChild(music)
         
         // Setup joystick
         joystick = self.childNode(withName: "/camera/joystick") as? SKSpriteNode
@@ -158,17 +162,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
-    func gameOver() {
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "GameOver!"
-        myLabel.fontSize = 65
-        myLabel.position = camera!.position
-        self.addChild(myLabel)
-        currentGameState = .gameOver
-        physicsWorld.speed = 0
-        isUserInteractionEnabled = false
-    }
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
@@ -195,5 +188,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updateCamera() {
         camera?.position = (player?.player!.position)!
+    }
+    
+    func gameOver() {
+        // gameover label on screen
+        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+        myLabel.text = "GameOver!"
+        myLabel.fontSize = 65
+        myLabel.position = camera!.position
+        self.addChild(myLabel)
+        
+        //game state
+        currentGameState = .gameOver
+        physicsWorld.speed = 0
+        isUserInteractionEnabled = false
+        music.removeFromParent()
     }
 }

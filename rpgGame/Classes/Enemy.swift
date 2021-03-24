@@ -244,10 +244,14 @@ class Enemy {
         
         //aggro if play in range
         if(TargetDistance() <= aggroRange! && !aggroed){
-            aggroed = true
+            setAggroState(state: true)
         }
         
         // animation cooldown timer
         elapsedTime = startTime.timeIntervalSinceNow * -1
+    }
+    
+    func setAggroState(state: Bool) {
+        aggroed = state
     }
 }
