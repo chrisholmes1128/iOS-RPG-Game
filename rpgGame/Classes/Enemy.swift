@@ -152,12 +152,14 @@ class Enemy {
         // delay functions
         // shot projectile fits animation time
         DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
-            gameScene?.addChild(projectile)
-            projectile.run(SKAction(named: projectileName!)!)
-            
-            //remove projectile after life time
-            DispatchQueue.main.asyncAfter(deadline: .now() + projectileLifeTime!) {
-                projectile.removeFromParent()
+            if currentAnimation == .attack1 {
+                gameScene?.addChild(projectile)
+                projectile.run(SKAction(named: projectileName!)!)
+                
+                //remove projectile after life time
+                DispatchQueue.main.asyncAfter(deadline: .now() + projectileLifeTime!) {
+                    projectile.removeFromParent()
+                }
             }
         }
     }
@@ -167,9 +169,7 @@ class Enemy {
         //stats
         self.health! -= damage
         startTime = NSDate()
-        if cooldown <= 1.5 {
-            cooldown = 1.5
-        }
+        cooldown = 1.0
         
         // if death
         if(health! <= 0) {
@@ -184,11 +184,6 @@ class Enemy {
         
         // pinned and release after cooldown
         enemy!.physicsBody?.pinned = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + cooldown) { [self] in
-            if(currentAnimation != .death || currentAnimation == .hit){
-                enemy!.physicsBody?.pinned = false
-            }
-        }
     }
     
     func Death() {
@@ -231,6 +226,7 @@ class Enemy {
         
         // movements
         if(elapsedTime > cooldown) {
+            enemy?.physicsBody?.pinned = false
             if TargetDistance() <= attackRange! {
                 if(attackRange! >= 100){
                     RangeAttack()
