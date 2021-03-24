@@ -167,7 +167,9 @@ class Enemy {
         //stats
         self.health! -= damage
         startTime = NSDate()
-        cooldown = 1.5
+        if cooldown <= 1.5 {
+            cooldown = 1.5
+        }
         
         // if death
         if(health! <= 0) {

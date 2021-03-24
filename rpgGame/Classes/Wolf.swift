@@ -20,7 +20,7 @@ class Wolf: Enemy {
         attackStagger = 0.1
         attackHitFrame = 0.6
         attackDamage = 5
-        aggroRange = 800
+        aggroRange = 600
     }
     
     override func setAggroState(state: Bool) {

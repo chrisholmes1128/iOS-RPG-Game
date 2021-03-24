@@ -21,7 +21,7 @@ class Witch: Enemy {
         attackStagger = 0.3
         attackDamage = 15
         attackHitFrame = 1.3
-        aggroRange = 700
+        aggroRange = 800
         projectileName = "fireball_black_000"
         projectileSpeed = 200
         projectileLifeTime = 5.0

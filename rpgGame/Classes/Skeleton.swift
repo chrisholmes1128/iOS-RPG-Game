@@ -19,7 +19,7 @@ class Skeleton: Enemy {
         attackRange = 70
         attackStagger = 0.5
         attackHitFrame = 1.0
-        attackDamage = 30
-        aggroRange = 300
+        attackDamage = 20
+        aggroRange = 400
     }
 }

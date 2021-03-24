@@ -28,7 +28,6 @@
 		994A0B91260A6DBD00F074D1 /* dungeon.sks in Resources */ = {isa = PBXBuildFile; fileRef = 994A0B8F260A6DBD00F074D1 /* dungeon.sks */; };
 		994A0B92260A6DBD00F074D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 994A0B90260A6DBD00F074D1 /* Assets.xcassets */; };
 		994A0BA0260AD37600F074D1 /* Everlasting-Snow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 994A0B9F260AD37600F074D1 /* Everlasting-Snow.mp3 */; };
-		994A0BA5260AD9B800F074D1 /* wolf_aggroed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BA4260AD9B800F074D1 /* wolf_aggroed.mp3 */; };
 		994A0BAF260ADA3A00F074D1 /* bite.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BAE260ADA3A00F074D1 /* bite.mp3 */; };
 		994A0BBB260AE2B800F074D1 /* player_damaged2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BB6260AE2B800F074D1 /* player_damaged2.wav */; };
 		994A0BBC260AE2B800F074D1 /* player_attack3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BB7260AE2B800F074D1 /* player_attack3.wav */; };
@@ -36,6 +35,7 @@
 		994A0BBE260AE2B800F074D1 /* player_damaged1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BB9260AE2B800F074D1 /* player_damaged1.wav */; };
 		994A0BBF260AE2B800F074D1 /* player_attack1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BBA260AE2B800F074D1 /* player_attack1.wav */; };
 		994A0BC4260AE3BB00F074D1 /* player_death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BC3260AE3BB00F074D1 /* player_death.wav */; };
+		994A0BDA260AE83D00F074D1 /* wolf_aggroed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 994A0BD9260AE83D00F074D1 /* wolf_aggroed.mp3 */; };
 		9954889925EF8DDD00C518B8 /* WitchAction.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9954889825EF8DDD00C518B8 /* WitchAction.sks */; };
 		9954889E25EF8E6900C518B8 /* Witch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9954889D25EF8E6900C518B8 /* Witch.swift */; };
 		995488A325EF922300C518B8 /* ProjectileAction.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995488A225EF922300C518B8 /* ProjectileAction.sks */; };
@@ -104,7 +104,6 @@
 		994A0B8F260A6DBD00F074D1 /* dungeon.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = dungeon.sks; sourceTree = "<group>"; };
 		994A0B90260A6DBD00F074D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		994A0B9F260AD37600F074D1 /* Everlasting-Snow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Everlasting-Snow.mp3"; sourceTree = "<group>"; };
-		994A0BA4260AD9B800F074D1 /* wolf_aggroed.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wolf_aggroed.mp3; sourceTree = "<group>"; };
 		994A0BAE260ADA3A00F074D1 /* bite.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bite.mp3; sourceTree = "<group>"; };
 		994A0BB6260AE2B800F074D1 /* player_damaged2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player_damaged2.wav; sourceTree = "<group>"; };
 		994A0BB7260AE2B800F074D1 /* player_attack3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player_attack3.wav; sourceTree = "<group>"; };
@@ -112,6 +111,7 @@
 		994A0BB9260AE2B800F074D1 /* player_damaged1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player_damaged1.wav; sourceTree = "<group>"; };
 		994A0BBA260AE2B800F074D1 /* player_attack1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player_attack1.wav; sourceTree = "<group>"; };
 		994A0BC3260AE3BB00F074D1 /* player_death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = player_death.wav; sourceTree = "<group>"; };
+		994A0BD9260AE83D00F074D1 /* wolf_aggroed.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wolf_aggroed.mp3; sourceTree = "<group>"; };
 		9954889825EF8DDD00C518B8 /* WitchAction.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WitchAction.sks; sourceTree = "<group>"; };
 		9954889D25EF8E6900C518B8 /* Witch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Witch.swift; sourceTree = "<group>"; };
 		995488A225EF922300C518B8 /* ProjectileAction.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ProjectileAction.sks; sourceTree = "<group>"; };
@@ -315,6 +315,7 @@
 		99F000CA25EEEBB700C9EC6A /* Sound effects */ = {
 			isa = PBXGroup;
 			children = (
+				994A0BD9260AE83D00F074D1 /* wolf_aggroed.mp3 */,
 				994A0BC3260AE3BB00F074D1 /* player_death.wav */,
 				994A0BBA260AE2B800F074D1 /* player_attack1.wav */,
 				994A0BB7260AE2B800F074D1 /* player_attack3.wav */,
@@ -322,7 +323,6 @@
 				994A0BB6260AE2B800F074D1 /* player_damaged2.wav */,
 				994A0BB8260AE2B800F074D1 /* player_damaged3.wav */,
 				994A0BAE260ADA3A00F074D1 /* bite.mp3 */,
-				994A0BA4260AD9B800F074D1 /* wolf_aggroed.mp3 */,
 				99A948A125EF579A00B71509 /* bone_breaks.mp3 */,
 				99A948A225EF579A00B71509 /* bone_impact.mp3 */,
 				99A9489B25EF4C8A00B71509 /* sword_swing1.mp3 */,
@@ -440,7 +440,6 @@
 				9202D92425CCAA10002B2EDF /* Preview Assets.xcassets in Resources */,
 				99A9489D25EF4C8A00B71509 /* sword_swing1.mp3 in Resources */,
 				994A0BC4260AE3BB00F074D1 /* player_death.wav in Resources */,
-				994A0BA5260AD9B800F074D1 /* wolf_aggroed.mp3 in Resources */,
 				995488A325EF922300C518B8 /* ProjectileAction.sks in Resources */,
 				994A0BBB260AE2B800F074D1 /* player_damaged2.wav in Resources */,
 				99A948A425EF579A00B71509 /* bone_impact.mp3 in Resources */,
@@ -451,6 +450,7 @@
 				994A0B91260A6DBD00F074D1 /* dungeon.sks in Resources */,
 				99A9489C25EF4C8A00B71509 /* sword_swing2.mp3 in Resources */,
 				99A948B325EF87BC00B71509 /* BatActions.sks in Resources */,
+				994A0BDA260AE83D00F074D1 /* wolf_aggroed.mp3 in Resources */,
 				994A0BAF260ADA3A00F074D1 /* bite.mp3 in Resources */,
 				99A948A325EF579A00B71509 /* bone_breaks.mp3 in Resources */,
 				99A9489325EF4A8F00B71509 /* axe_swing2.mp3 in Resources */,
