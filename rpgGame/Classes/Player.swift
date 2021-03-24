@@ -17,6 +17,9 @@ class Player {
     var staminaBarWidth: CGFloat?
     
     //stats
+    var iframe: Double = 0.5 // invincible frame
+    var iframStartTime = NSDate()
+    var elapsedIframeTime: Double = 9.9
     let attackDamage: CGFloat = 20
     let attackRange: CGFloat = 100
     let playerSpeed: CGFloat = 150.0
@@ -170,28 +173,31 @@ class Player {
     }
     
     func hit(damage: CGFloat, staggerTimer: Double) {
-        //stats
-        health! -= damage
-        startTime = NSDate()
-        cooldown = staggerTimer
-        
-        // gameover if health < 0
-        if(health! <= 0) {
-            Death()
-            return
-        }
-        
-        // animation
-        player!.removeAllActions()
-        player!.run(SKAction(named: "warrior_hit")!)
-        currentAction = .hit
-        
-        // pinned and release after cooldown
-        player!.physicsBody?.pinned = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + cooldown) { [self] in
-            if(currentAction != .death){
-            player!.physicsBody?.pinned = false
-            Idle()
+        if elapsedIframeTime > iframe {
+            //stats
+            health! -= damage
+            startTime = NSDate()
+            iframStartTime = NSDate()
+            cooldown = staggerTimer
+            
+            // gameover if health < 0
+            if(health! <= 0) {
+                Death()
+                return
+            }
+            
+            // animation
+            player!.removeAllActions()
+            player!.run(SKAction(named: "warrior_hit")!)
+            currentAction = .hit
+            
+            // pinned and release after cooldown
+            player!.physicsBody?.pinned = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + cooldown) { [self] in
+                if(currentAction != .death){
+                    player!.physicsBody?.pinned = false
+                    Idle()
+                }
             }
         }
     }
@@ -246,7 +252,8 @@ class Player {
             }
         }
         
-        // action cooldown
+        // cooldown
         elapsedTime = startTime.timeIntervalSinceNow * -1
+        elapsedIframeTime = startTime.timeIntervalSinceNow * -1
     }
 }

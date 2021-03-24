@@ -24,6 +24,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player:Player?
     var enemies: [Enemy?] = []
     let music = SKAudioNode(fileNamed: "Everlasting-Snow.mp3")
+    var background: SKTileMapNode?
+    var objects: SKTileMapNode?
     
     //stats
     var touchTime = NSDate()
@@ -48,6 +50,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         joystick = self.childNode(withName: "/camera/joystick") as? SKSpriteNode
         joystickHandle = self.childNode(withName: "/camera/joystick/joystickHandle") as? SKSpriteNode
         joystick?.alpha = 0
+        
+        // setup tile maps
+        background = self.childNode(withName: "/room") as? SKTileMapNode
+        objects = self.childNode(withName: "/room/objects") as? SKTileMapNode
         
         // Setup player
         player = Player(gameScene: self)
@@ -120,6 +126,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //joystick
         joystickHandle?.position = joystickHandleLocation
         
+        //disable player control when gameover or hit
+        if currentGameState == .gameOver || player?.currentAction == .hit {
+            return
+        }
+        
         //character movement
         if distance != 0 {
             //velocity
@@ -141,6 +152,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let angle = atan2(joystickHandleLocation.y, joystickHandleLocation.x)
         let distance = sqrt(pow(joystickHandleLocation.x, 2) + pow(joystickHandleLocation.y, 2))
         
+        //disable player control when gameover or hit
+        if currentGameState == .gameOver || player?.currentAction == .hit {
+            return
+        }
+
         //character movement
         if elapsedTime < 0.2 {
             if distance >= 1.5{
@@ -184,6 +200,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             updateCamera()
         }
+        
+        // objects interaction
+        objectDetection()
     }
     
     func updateCamera() {
@@ -203,5 +222,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.speed = 0
         isUserInteractionEnabled = false
         music.removeFromParent()
+    }
+    
+    func objectDetection() {
+        let position = convert((player?.player!.position)!, to: objects!)
+        let column = objects?.tileColumnIndex(fromPosition: position)
+        let row = (objects?.tileRowIndex(fromPosition: position))! - 1
+        let tile = objects?.tileDefinition(atColumn: column!, row: row)
+        handleObject(tile: tile)
+    }
+    
+    func handleObject(tile: SKTileDefinition?) {
+        if tile == nil {
+            return
+        }
+        if tile!.name == "peaks_1" {
+            player?.hit(damage: 5, staggerTimer: 0.2)
+        }
     }
 }
