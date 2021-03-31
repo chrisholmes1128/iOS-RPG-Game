@@ -204,6 +204,7 @@ class Enemy {
         //status
         health = 0
         currentAnimation = .death
+        UserInterface()
         
         //score
         target?.maxScore += self.score!

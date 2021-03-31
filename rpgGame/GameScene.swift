@@ -273,6 +273,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if isDoorTile ?? false {
                         tileNode.name = "door"
                     }
+                    tileNode.alpha = 0
                     tileNode.position = CGPoint(x: x, y: y)
                     tileNode.physicsBody = SKPhysicsBody.init(rectangleOf: tileSize, center: CGPoint(x: tileSize.width / 2.0, y: tileSize.height / 2.0))
                     tileNode.physicsBody?.isDynamic = false
