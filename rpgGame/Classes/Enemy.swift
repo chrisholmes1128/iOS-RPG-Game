@@ -8,7 +8,7 @@
 import SpriteKit
 
 class Enemy {
-    var gameScene: SKScene?
+    var gameScene: GameScene
     
     //textures
     var enemy: SKSpriteNode?
@@ -49,7 +49,7 @@ class Enemy {
         case death
     }
     
-    init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+    init(gameScene:GameScene, enemy: SKSpriteNode, target: Player) {
         self.gameScene = gameScene
         self.enemy = enemy
         self.target = target
@@ -147,16 +147,18 @@ class Enemy {
                 projectile.physicsBody?.isDynamic = true
                 projectile.physicsBody?.allowsRotation = false
                 projectile.physicsBody?.usesPreciseCollisionDetection = true
+                projectile.physicsBody?.categoryBitMask = bitMask.projectile
+                projectile.physicsBody?.collisionBitMask = bitMask.none
                 projectile.physicsBody?.contactTestBitMask = bitMask.player | bitMask.wall
                 
-                projectile.physicsBody!.velocity = newVelocity
                 let rotationAction = SKAction.rotate(toAngle: angle + .pi, duration: 0)
                 projectile.run(rotationAction)
                 let scaleAction = SKAction.scale(to: CGFloat(2), duration: 0)
                 projectile.run(scaleAction)
+                projectile.physicsBody!.velocity = newVelocity
                 
                 //display
-                gameScene?.addChild(projectile)
+                gameScene.addChild(projectile)
                 projectile.run(SKAction(named: projectileName!)!)
                 
                 //remove projectile after life time
@@ -172,7 +174,9 @@ class Enemy {
         //stats
         self.health! -= damage
         startTime = NSDate()
-        cooldown = 1.0
+        if cooldown < 1.0 {
+            cooldown = 1.0
+        }
         
         // if death
         if(health! <= 0) {

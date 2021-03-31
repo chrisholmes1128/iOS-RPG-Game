@@ -9,7 +9,7 @@ import SpriteKit
 
 class Skeleton: Enemy {
     
-    override init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+    override init(gameScene:GameScene, enemy: SKSpriteNode, target: Player) {
         super.init(gameScene:gameScene, enemy: enemy, target: target)
         name = "skeleton"
         radius = 100
@@ -34,7 +34,8 @@ class Skeleton: Enemy {
         enemy.physicsBody?.isDynamic = true
         enemy.physicsBody?.allowsRotation = false
         enemy.physicsBody?.restitution = 0
-        enemy.physicsBody?.collisionBitMask = bitMask.wall
         enemy.physicsBody?.categoryBitMask = bitMask.enemy
+        enemy.physicsBody?.collisionBitMask = bitMask.wall
+        enemy.physicsBody?.contactTestBitMask = bitMask.none
     }
 }

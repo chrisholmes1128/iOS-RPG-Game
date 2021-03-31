@@ -9,7 +9,7 @@ import SpriteKit
 
 class Witch: Enemy {
     
-    override init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+    override init(gameScene:GameScene, enemy: SKSpriteNode, target: Player) {
         super.init(gameScene:gameScene, enemy: enemy, target: target)
         //stats
         name = "witch"
@@ -38,7 +38,14 @@ class Witch: Enemy {
         enemy.physicsBody?.isDynamic = true
         enemy.physicsBody?.allowsRotation = false
         enemy.physicsBody?.restitution = 0
-        enemy.physicsBody?.collisionBitMask = bitMask.wall
         enemy.physicsBody?.categoryBitMask = bitMask.enemy
+        enemy.physicsBody?.collisionBitMask = bitMask.wall
+        enemy.physicsBody?.contactTestBitMask = bitMask.none
+    }
+    
+    override func Death() {
+        super.Death()
+        gameScene.currentGameState = .win
+        gameScene.gameOver()
     }
 }

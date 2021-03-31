@@ -9,7 +9,7 @@ import SpriteKit
 
 class Bat: Enemy {
     
-    override init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+    override init(gameScene:GameScene, enemy: SKSpriteNode, target: Player) {
         super.init(gameScene:gameScene, enemy: enemy, target: target)
         //stats
         name = "bat"
@@ -35,7 +35,8 @@ class Bat: Enemy {
         enemy.physicsBody?.isDynamic = true
         enemy.physicsBody?.allowsRotation = false
         enemy.physicsBody?.restitution = 0
-        enemy.physicsBody?.collisionBitMask = bitMask.wall
         enemy.physicsBody?.categoryBitMask = bitMask.enemy
+        enemy.physicsBody?.collisionBitMask = bitMask.wall
+        enemy.physicsBody?.contactTestBitMask = bitMask.none
     }
 }

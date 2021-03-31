@@ -60,8 +60,13 @@ class Player {
         self.gameScene = gameScene
         
         //physics
-        player?.physicsBody?.collisionBitMask = bitMask.wall
+        player?.physicsBody?.isDynamic = true
+        player?.physicsBody?.allowsRotation = false
+        player?.physicsBody?.affectedByGravity = false
+        player?.physicsBody?.restitution = 0
         player?.physicsBody?.categoryBitMask = bitMask.player
+        player?.physicsBody?.collisionBitMask = bitMask.wall
+        player?.physicsBody?.contactTestBitMask = bitMask.none
         
         //UI
         healthBar = gameScene.childNode(withName: "/camera/healthBar/health") as? SKSpriteNode
@@ -198,6 +203,7 @@ class Player {
             health! -= damage
             startTime = NSDate()
             iframStartTime = NSDate()
+            elapsedIframeTime = 0
             cooldown = staggerTimer
             
             // gameover if health < 0
@@ -239,6 +245,8 @@ class Player {
         //status
         health = 0
         currentAction = .death
+        gameScene.currentGameState = .gameOver
+        gameScene.gameOver()
         
         //update gui
         UserInterface()
@@ -250,17 +258,13 @@ class Player {
         staminaBar?.size.width = staminaBarWidth! * stamina! / maxStamina
         
         //Score
+        score = maxScore - Int(scoreStartTime.timeIntervalSinceNow * -1)
         scoreLabel!.text = "Score: " + String(Int(score!))
     }
     
     func Update() {
         //UI
         UserInterface()
-        
-        // dead
-        if(health! <= 0) {
-            return
-        }
         
         // health & stamina regen
         if(currentAction == .idle) {
@@ -279,6 +283,5 @@ class Player {
         // cooldown
         elapsedTime = startTime.timeIntervalSinceNow * -1
         elapsedIframeTime = iframStartTime.timeIntervalSinceNow * -1
-        score = maxScore - Int(scoreStartTime.timeIntervalSinceNow * -1)
     }
 }

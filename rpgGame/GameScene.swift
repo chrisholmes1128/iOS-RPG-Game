@@ -39,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var touchTime = NSDate()
     var currentGameState = gameState.playing
     enum gameState {
+        case win
         case gameOver
         case paused
         case playing
@@ -107,7 +108,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for enemy in enemies {
                 if enemy?.projectileName == nodeB.name {
                     if player?.currentAction != .death {
-                        print("hit")
                         player!.hit(damage: enemy!.attackDamage!, staggerTimer: enemy!.attackStagger!)
                         nodeB.removeFromParent()
                         return
@@ -210,10 +210,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if player?.currentAction == .death {
-            gameOver()
-        }
-        
         // if game is not paused
         if currentGameState != .paused {
             player!.Update()
@@ -223,10 +219,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             updateCamera()
+            
+            // objects interaction
+            objectDetection()
         }
         
-        // objects interaction
-        objectDetection()
     }
     
     func updateCamera() {
@@ -234,18 +231,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
+        //update one last cycle then stop
+        player?.Update()
+        for enemy in enemies {
+            enemy?.Update()
+        }
+        physicsWorld.speed = 0
+        isUserInteractionEnabled = false
+        music.removeFromParent()
+        
         // gameover label on screen
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "GameOver!"
+        if currentGameState == .gameOver {
+            myLabel.text = "GameOver!"
+        } else if currentGameState == .win {
+            myLabel.text = "Final Score: " + String(player!.score!)
+        }
         myLabel.fontSize = 65
         myLabel.position = camera!.position
         self.addChild(myLabel)
         
-        //game state
         currentGameState = .gameOver
-        physicsWorld.speed = 0
-        isUserInteractionEnabled = false
-        music.removeFromParent()
     }
     
     func tileMapCollision(tileMap: SKTileMapNode) {
@@ -272,6 +278,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     tileNode.physicsBody?.isDynamic = false
                     tileNode.physicsBody?.restitution = 0
                     tileNode.physicsBody?.categoryBitMask = bitMask.wall
+                    tileNode.physicsBody?.collisionBitMask = bitMask.none
                     tileNode.physicsBody?.contactTestBitMask = bitMask.player
                     tileMap.addChild(tileNode)
                 }
