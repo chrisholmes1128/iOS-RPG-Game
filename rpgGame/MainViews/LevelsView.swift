@@ -24,7 +24,7 @@ struct LevelsView: View {
                     .border(Color.white, width: 3)
                     .cornerRadius(8)
                     .onTapGesture {
-                        viewRouter.currentPage = .GameView
+                        viewRouter.currentPage = .Tutorial1View
                     }
                 
                 Text("LEVEL 2")

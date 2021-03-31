@@ -15,4 +15,8 @@ enum Page {
     case LevelsView
     case GameView
     case PauseMenuView
+    case Tutorial1View
+    case Tutorial2View
+    case Tutorial3View
+    case ReadyToPlayView
 }

@@ -22,8 +22,16 @@ struct MotherView: View {
                 GameCenterView().transition(.scale)
             case .LevelsView:
                 LevelsView().transition(.scale)
+            case .Tutorial1View:
+                Tutorial1View().transition(.scale)
+            case .Tutorial2View:
+                Tutorial2View().transition(.scale)
+            case .Tutorial3View:
+                Tutorial3View().transition(.scale)
+            case .ReadyToPlayView:
+                ReadyToPlayView().transition(.scale)
             case .GameView:
-                GameView().transition(.scale)
+                GameView(started: Binding.constant(true)).transition(.scale)
             case .PauseMenuView:
                 PauseMenuView(pauseMenuShowing: Binding.constant(true)).transition(.scale)
         }
