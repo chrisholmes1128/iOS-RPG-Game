@@ -21,5 +21,19 @@ class Skeleton: Enemy {
         attackHitFrame = 1.0
         attackDamage = 20
         aggroRange = 400
+        
+        //health bar
+        healthBar?.size.height = 3
+        healthBar?.size.width = enemy.size.width / 3
+        healthBar?.position.y = enemy.size.height / 7
+        self.healthBarWidth = self.healthBar?.size.width
+        
+        //physics
+        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.size.width / 1.5)
+        enemy.physicsBody?.isDynamic = true
+        enemy.physicsBody?.allowsRotation = false
+        enemy.physicsBody?.restitution = 0
+        enemy.physicsBody?.collisionBitMask = bitMask.wall
+        enemy.physicsBody?.categoryBitMask = bitMask.enemy
     }
 }

@@ -52,9 +52,8 @@ class Enemy {
         self.gameScene = gameScene
         self.enemy = enemy
         self.target = target
-        self.healthBar = enemy.children.first(where: {$0.name == "health"}) as? SKSpriteNode
-        self.healthBarWidth = self.healthBar?.size.width
-        self.healthBar?.alpha = 0
+        self.healthBar = SKSpriteNode(imageNamed: "Health")
+        enemy.addChild(healthBar!)
     }
     
     func TargetDistance() -> CGFloat{
@@ -131,28 +130,31 @@ class Enemy {
         enemy!.run(SKAction(named: name! + "_attack1")!)
         enemy!.physicsBody?.pinned = true
         
-        //calculations
-        let angle = TargetAngle()
-        let newVelocity = CGVector(dx: projectileSpeed! * cos(angle), dy: projectileSpeed! * sin(angle))
-        
-        // physics
-        projectile.position = enemy!.position
-        projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/10)
-        projectile.anchorPoint = CGPoint(x: 0.1, y: 0.5)
-        projectile.physicsBody?.isDynamic = true
-        projectile.physicsBody?.usesPreciseCollisionDetection = true
-        projectile.physicsBody?.contactTestBitMask = 0x00000001
-        
-        projectile.physicsBody!.velocity = newVelocity
-        let rotationAction = SKAction.rotate(toAngle: angle + .pi, duration: 0)
-        projectile.run(rotationAction)
-        let scaleAction = SKAction.scale(to: CGFloat(2), duration: 0)
-        projectile.run(scaleAction)
-        
         // delay functions
         // shot projectile fits animation time
         DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
             if currentAnimation == .attack1 {
+                
+                //calculations
+                let angle = TargetAngle()
+                let newVelocity = CGVector(dx: projectileSpeed! * cos(angle), dy: projectileSpeed! * sin(angle))
+                
+                // physics
+                projectile.position = enemy!.position
+                projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/10)
+                projectile.anchorPoint = CGPoint(x: 0.1, y: 0.5)
+                projectile.physicsBody?.isDynamic = true
+                projectile.physicsBody?.allowsRotation = false
+                projectile.physicsBody?.usesPreciseCollisionDetection = true
+                projectile.physicsBody?.contactTestBitMask = bitMask.player | bitMask.wall
+                
+                projectile.physicsBody!.velocity = newVelocity
+                let rotationAction = SKAction.rotate(toAngle: angle + .pi, duration: 0)
+                projectile.run(rotationAction)
+                let scaleAction = SKAction.scale(to: CGFloat(2), duration: 0)
+                projectile.run(scaleAction)
+                
+                //display
                 gameScene?.addChild(projectile)
                 projectile.run(SKAction(named: projectileName!)!)
                 

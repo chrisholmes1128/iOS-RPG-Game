@@ -52,6 +52,10 @@ class Player {
         self.mana = self.maxMana
         self.stamina = self.maxStamina
         
+        //physics
+        player?.physicsBody?.collisionBitMask = bitMask.wall
+        player?.physicsBody?.categoryBitMask = bitMask.player
+        
         //UI
         healthBar = gameScene.childNode(withName: "/camera/healthBar/health") as? SKSpriteNode
         healthBarWidth = healthBar?.size.width

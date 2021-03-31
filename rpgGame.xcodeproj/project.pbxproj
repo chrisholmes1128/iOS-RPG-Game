@@ -396,6 +396,9 @@
 		9202D91125CCAA0F002B2EDF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					edgeTile,
+				);
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {

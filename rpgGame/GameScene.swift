@@ -10,6 +10,14 @@ import GameplayKit
 import UIKit
 import SwiftUI
 
+struct bitMask {
+    static let none:UInt32 = 0x00000000
+    static let player:UInt32 = 0x00000001
+    static let enemy:UInt32 = 0x00000010
+    static let projectile:UInt32 = 0x00000011
+    static let wall:UInt32 = 0x00000100
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Instance Variables
     @Published var gameIsPaused = false {
@@ -24,7 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player:Player?
     var enemies: [Enemy?] = []
     let music = SKAudioNode(fileNamed: "Everlasting-Snow.mp3")
-    var background: SKTileMapNode?
+    var tileMap: SKTileMapNode?
     var objects: SKTileMapNode?
     
     //stats
@@ -52,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         joystick?.alpha = 0
         
         // setup tile maps
-        background = self.childNode(withName: "/room") as? SKTileMapNode
+        tileMapCollision()
         objects = self.childNode(withName: "/room/objects") as? SKTileMapNode
         
         // Setup player
@@ -84,7 +92,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Handle the collitions in each nodes class
         guard let nodeA = contact.bodyA.node else { return }
         guard let nodeB = contact.bodyB.node else { return }
+        if nodeA.name == nil || nodeB.name == nil {
+            return
+        }
         
+        print(nodeA.name, nodeB.name)
         projectileCollision(nodeA: nodeA, nodeB: nodeB)
     }
     
@@ -93,11 +105,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for enemy in enemies {
                 if enemy?.projectileName == nodeB.name {
                     if player?.currentAction != .death {
+                        print("hit")
                         player!.hit(damage: enemy!.attackDamage!, staggerTimer: enemy!.attackStagger!)
                         nodeB.removeFromParent()
+                        return
                     }
                 }
             }
+        } else if nodeA.name == "wall" {
+            nodeB.removeFromParent()
         }
     }
     
@@ -224,6 +240,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         music.removeFromParent()
     }
     
+    func tileMapCollision() {
+        self.tileMap = self.childNode(withName: "room") as? SKTileMapNode
+        guard let tileMap = self.tileMap else { fatalError("Missing tile map for the level") }
+
+        let tileSize = tileMap.tileSize
+        let halfWidth = CGFloat(tileMap.numberOfColumns) / 2.0 * tileSize.width
+        let halfHeight = CGFloat(tileMap.numberOfRows) / 2.0 * tileSize.height
+
+        for col in 0..<tileMap.numberOfColumns {
+            for row in 0..<tileMap.numberOfRows {
+                let tileDefinition = tileMap.tileDefinition(atColumn: col, row: row)
+                let isEdgeTile = tileDefinition?.userData?["edgeTile"] as? Bool
+                if (isEdgeTile ?? false) {
+                    let x = CGFloat(col) * tileSize.width - halfWidth
+                    let y = CGFloat(row) * tileSize.height - halfHeight
+                    let rect = CGRect(x: 0, y: 0, width: tileSize.width, height: tileSize.height)
+                    let tileNode = SKShapeNode(rect: rect)
+                    tileNode.name = "wall"
+                    tileNode.position = CGPoint(x: x, y: y)
+                    tileNode.physicsBody = SKPhysicsBody.init(rectangleOf: tileSize, center: CGPoint(x: tileSize.width / 2.0, y: tileSize.height / 2.0))
+                    tileNode.physicsBody?.isDynamic = false
+                    tileNode.physicsBody?.restitution = 0
+                    tileNode.physicsBody?.categoryBitMask = bitMask.wall
+                    tileMap.addChild(tileNode)
+                }
+            }
+        }
+    }
+    
     func objectDetection() {
         let position = convert((player?.player!.position)!, to: objects!)
         let column = objects?.tileColumnIndex(fromPosition: position)
@@ -238,6 +283,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if tile!.name == "peaks_1" {
             player?.hit(damage: 5, staggerTimer: 0.2)
+        } else {
+            return
         }
     }
 }

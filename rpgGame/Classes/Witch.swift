@@ -26,7 +26,18 @@ class Witch: Enemy {
         projectileSpeed = 200
         projectileLifeTime = 5.0
         
-        //physics
+        //health bar
+        healthBar?.size.height = 3
+        healthBar?.size.width = enemy.size.width / 4
+        healthBar?.position.y = enemy.size.height / 7
+        self.healthBarWidth = self.healthBar?.size.width
         
+        //physics
+        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemy.size.width / 3)
+        enemy.physicsBody?.isDynamic = true
+        enemy.physicsBody?.allowsRotation = false
+        enemy.physicsBody?.restitution = 0
+        enemy.physicsBody?.collisionBitMask = bitMask.wall
+        enemy.physicsBody?.categoryBitMask = bitMask.enemy
     }
 }
