@@ -21,6 +21,7 @@ class Skeleton: Enemy {
         attackHitFrame = 1.0
         attackDamage = 20
         aggroRange = 400
+        score = 300
         
         //health bar
         healthBar?.size.height = 3

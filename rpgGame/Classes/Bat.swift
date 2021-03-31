@@ -22,6 +22,7 @@ class Bat: Enemy {
         attackHitFrame = 0.6
         attackDamage = 5
         aggroRange = 400
+        score = 50
         
         //health bar
         healthBar?.size.height = 4

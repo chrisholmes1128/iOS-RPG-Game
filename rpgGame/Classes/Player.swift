@@ -10,16 +10,21 @@ import GameplayKit
 
 class Player {
     //textures
+    var gameScene: GameScene
     var player: SKSpriteNode?
     var healthBar: SKSpriteNode?
     var healthBarWidth: CGFloat?
     var staminaBar: SKSpriteNode?
     var staminaBarWidth: CGFloat?
+    var scoreLabel: SKLabelNode?
     
     //stats
+    var maxScore: Int = 1000
+    var score: Int?
+    var scoreStartTime = NSDate()
     var iframe: Double = 0.5 // invincible frame
     var iframStartTime = NSDate()
-    var elapsedIframeTime: Double = 9.9
+    var elapsedIframeTime: Double = 0.0
     let attackDamage: CGFloat = 20
     let attackRange: CGFloat = 100
     let playerSpeed: CGFloat = 150.0
@@ -51,6 +56,7 @@ class Player {
         self.health = self.maxHealth
         self.mana = self.maxMana
         self.stamina = self.maxStamina
+        self.gameScene = gameScene
         
         //physics
         player?.physicsBody?.collisionBitMask = bitMask.wall
@@ -61,6 +67,15 @@ class Player {
         healthBarWidth = healthBar?.size.width
         staminaBar = gameScene.childNode(withName: "/camera/healthBar/stamina") as? SKSpriteNode
         staminaBarWidth = staminaBar?.size.width
+        
+        //Score
+        self.score = self.maxScore
+        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
+        scoreLabel!.text = "Score: " + String(score!)
+        scoreLabel!.fontSize = 50
+        scoreLabel!.position = gameScene.camera!.position
+        scoreLabel!.position.y += gameScene.size.height / 2 - 100
+        gameScene.camera!.addChild(scoreLabel!)
         
         //animation
         Idle()
@@ -229,8 +244,12 @@ class Player {
     }
     
     func UserInterface() {
+        // Health/Stamina
         healthBar?.size.width = healthBarWidth! * health! / maxHealth
         staminaBar?.size.width = staminaBarWidth! * stamina! / maxStamina
+        
+        //Score
+        scoreLabel!.text = "Score: " + String(Int(score!))
     }
     
     func Update() {
@@ -258,6 +277,7 @@ class Player {
         
         // cooldown
         elapsedTime = startTime.timeIntervalSinceNow * -1
-        elapsedIframeTime = startTime.timeIntervalSinceNow * -1
+        elapsedIframeTime = iframStartTime.timeIntervalSinceNow * -1
+        score = maxScore - Int(scoreStartTime.timeIntervalSinceNow * -1)
     }
 }

@@ -21,6 +21,7 @@ class Wolf: Enemy {
         attackHitFrame = 0.6
         attackDamage = 5
         aggroRange = 600
+        score = 50
         
         //health bar
         healthBar?.size.height = 4

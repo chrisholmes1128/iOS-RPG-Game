@@ -96,7 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        print(nodeA.name, nodeB.name)
+        print(nodeA.name as Any, nodeB.name as Any)
         projectileCollision(nodeA: nodeA, nodeB: nodeB)
     }
     

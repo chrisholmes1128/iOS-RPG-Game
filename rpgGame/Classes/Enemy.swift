@@ -32,6 +32,7 @@ class Enemy {
     var projectileLifeTime: Double?
     var aggroRange: CGFloat?
     var aggroed: Bool = false
+    var score: Int?
     
     //animations
     var startTime = NSDate()
@@ -199,6 +200,9 @@ class Enemy {
         //status
         health = 0
         currentAnimation = .death
+        
+        //score
+        target?.maxScore += self.score!
     }
     
     func Idle() {
