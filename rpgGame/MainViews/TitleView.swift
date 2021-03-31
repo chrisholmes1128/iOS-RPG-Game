@@ -29,7 +29,7 @@ struct TitleView: View {
                         Text("START")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                             .foregroundColor(.white)
-                            .frame(width: 120, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .transition(.move(edge: .leading))
                             .padding()
                             .border(Color.white, width: 3)
@@ -44,7 +44,7 @@ struct TitleView: View {
                         Text("SETTINGS")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                             .foregroundColor(.white)
-                            .frame(width: 120, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .transition(.move(edge: .leading))
                             .padding()
                             .border(Color.white, width: 3)
@@ -59,7 +59,7 @@ struct TitleView: View {
                         Text("SCORES")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                             .foregroundColor(.white)
-                            .frame(width: 120, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                             .transition(.move(edge: .leading))
                             .padding()
                             .border(Color.white, width: 3)
@@ -68,6 +68,21 @@ struct TitleView: View {
                                 withAnimation{
                                     titleShowing.toggle()
                                     viewRouter.currentPage = .highScoresView
+                                }
+                            }
+                        
+                        Text("HOW TO PLAY")
+                            .font(.system(size: 22, weight: .heavy, design: .rounded))
+                            .foregroundColor(.white)
+                            .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .transition(.move(edge: .leading))
+                            .padding()
+                            .border(Color.white, width: 3)
+                            .cornerRadius(8)
+                            .onTapGesture {
+                                withAnimation{
+                                    titleShowing.toggle()
+                                    viewRouter.currentPage = .HowToPlayView
                                 }
                             }
                         

@@ -11,6 +11,7 @@ enum Page {
     case homeScreenView
     case optionsView
     case highScoresView
+    case HowToPlayView
     case gameCenterView
     case LevelsView
     case GameView

@@ -8,7 +8,7 @@
 import SpriteKit
 
 class Enemy {
-    var gameScene: SKScene?
+    var gameScene: GameScene
     
     //textures
     var enemy: SKSpriteNode?
@@ -32,6 +32,7 @@ class Enemy {
     var projectileLifeTime: Double?
     var aggroRange: CGFloat?
     var aggroed: Bool = false
+    var score: Int?
     
     //animations
     var startTime = NSDate()
@@ -48,13 +49,12 @@ class Enemy {
         case death
     }
     
-    init(gameScene:SKScene, enemy: SKSpriteNode, target: Player) {
+    init(gameScene:GameScene, enemy: SKSpriteNode, target: Player) {
         self.gameScene = gameScene
         self.enemy = enemy
         self.target = target
-        self.healthBar = enemy.children.first(where: {$0.name == "health"}) as? SKSpriteNode
-        self.healthBarWidth = self.healthBar?.size.width
-        self.healthBar?.alpha = 0
+        self.healthBar = SKSpriteNode(imageNamed: "Health")
+        enemy.addChild(healthBar!)
     }
     
     func TargetDistance() -> CGFloat{
@@ -131,29 +131,34 @@ class Enemy {
         enemy!.run(SKAction(named: name! + "_attack1")!)
         enemy!.physicsBody?.pinned = true
         
-        //calculations
-        let angle = TargetAngle()
-        let newVelocity = CGVector(dx: projectileSpeed! * cos(angle), dy: projectileSpeed! * sin(angle))
-        
-        // physics
-        projectile.position = enemy!.position
-        projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/10)
-        projectile.anchorPoint = CGPoint(x: 0.1, y: 0.5)
-        projectile.physicsBody?.isDynamic = true
-        projectile.physicsBody?.usesPreciseCollisionDetection = true
-        projectile.physicsBody?.contactTestBitMask = 0x00000001
-        
-        projectile.physicsBody!.velocity = newVelocity
-        let rotationAction = SKAction.rotate(toAngle: angle + .pi, duration: 0)
-        projectile.run(rotationAction)
-        let scaleAction = SKAction.scale(to: CGFloat(2), duration: 0)
-        projectile.run(scaleAction)
-        
         // delay functions
         // shot projectile fits animation time
         DispatchQueue.main.asyncAfter(deadline: .now() + attackHitFrame!) { [self] in
             if currentAnimation == .attack1 {
-                gameScene?.addChild(projectile)
+                
+                //calculations
+                let angle = TargetAngle()
+                let newVelocity = CGVector(dx: projectileSpeed! * cos(angle), dy: projectileSpeed! * sin(angle))
+                
+                // physics
+                projectile.position = enemy!.position
+                projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/10)
+                projectile.anchorPoint = CGPoint(x: 0.1, y: 0.5)
+                projectile.physicsBody?.isDynamic = true
+                projectile.physicsBody?.allowsRotation = false
+                projectile.physicsBody?.usesPreciseCollisionDetection = true
+                projectile.physicsBody?.categoryBitMask = bitMask.projectile
+                projectile.physicsBody?.collisionBitMask = bitMask.none
+                projectile.physicsBody?.contactTestBitMask = bitMask.player | bitMask.wall
+                
+                let rotationAction = SKAction.rotate(toAngle: angle + .pi, duration: 0)
+                projectile.run(rotationAction)
+                let scaleAction = SKAction.scale(to: CGFloat(2), duration: 0)
+                projectile.run(scaleAction)
+                projectile.physicsBody!.velocity = newVelocity
+                
+                //display
+                gameScene.addChild(projectile)
                 projectile.run(SKAction(named: projectileName!)!)
                 
                 //remove projectile after life time
@@ -169,7 +174,9 @@ class Enemy {
         //stats
         self.health! -= damage
         startTime = NSDate()
-        cooldown = 1.0
+        if cooldown < 1.0 {
+            cooldown = 1.0
+        }
         
         // if death
         if(health! <= 0) {
@@ -197,6 +204,10 @@ class Enemy {
         //status
         health = 0
         currentAnimation = .death
+        UserInterface()
+        
+        //score
+        target?.maxScore += self.score!
     }
     
     func Idle() {

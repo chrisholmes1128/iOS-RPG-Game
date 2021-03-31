@@ -10,6 +10,14 @@ import GameplayKit
 import UIKit
 import SwiftUI
 
+struct bitMask {
+    static let none:UInt32 = 0x00000000
+    static let player:UInt32 = 0x00000001
+    static let enemy:UInt32 = 0x00000010
+    static let projectile:UInt32 = 0x00000011
+    static let wall:UInt32 = 0x00000100
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Instance Variables
     @Published var gameIsPaused = false {
@@ -24,13 +32,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player:Player?
     var enemies: [Enemy?] = []
     let music = SKAudioNode(fileNamed: "Everlasting-Snow.mp3")
-    var background: SKTileMapNode?
+    var tileMap: SKTileMapNode?
     var objects: SKTileMapNode?
     
     //stats
     var touchTime = NSDate()
     var currentGameState = gameState.playing
     enum gameState {
+        case win
         case gameOver
         case paused
         case playing
@@ -52,8 +61,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         joystick?.alpha = 0
         
         // setup tile maps
-        background = self.childNode(withName: "/room") as? SKTileMapNode
+        self.tileMap = self.childNode(withName: "room") as? SKTileMapNode
+        tileMapCollision(tileMap: self.tileMap!)
         objects = self.childNode(withName: "/room/objects") as? SKTileMapNode
+        tileMapCollision(tileMap: objects!)
         
         // Setup player
         player = Player(gameScene: self)
@@ -84,8 +95,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Handle the collitions in each nodes class
         guard let nodeA = contact.bodyA.node else { return }
         guard let nodeB = contact.bodyB.node else { return }
+        if nodeA.name == nil || nodeB.name == nil {
+            return
+        }
         
         projectileCollision(nodeA: nodeA, nodeB: nodeB)
+        doorCollision(nodeA: nodeA, nodeB: nodeB)
     }
     
     func projectileCollision(nodeA: SKNode, nodeB: SKNode) {
@@ -95,9 +110,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if player?.currentAction != .death {
                         player!.hit(damage: enemy!.attackDamage!, staggerTimer: enemy!.attackStagger!)
                         nodeB.removeFromParent()
+                        return
                     }
                 }
             }
+        } else if nodeA.name == "wall" {
+            nodeB.removeFromParent()
+        }
+    }
+    
+    func doorCollision(nodeA: SKNode, nodeB: SKNode) {
+        if nodeA.name == "player" && nodeB.name == "door" && player!.key {
+            nodeB.removeFromParent()
         }
     }
     
@@ -186,10 +210,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if player?.currentAction == .death {
-            gameOver()
-        }
-        
         // if game is not paused
         if currentGameState != .paused {
             player!.Update()
@@ -199,10 +219,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             updateCamera()
+            
+            // objects interaction
+            objectDetection()
         }
         
-        // objects interaction
-        objectDetection()
     }
     
     func updateCamera() {
@@ -210,18 +231,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameOver() {
+        //update one last cycle then stop
+        player?.Update()
+        for enemy in enemies {
+            enemy?.Update()
+        }
+        physicsWorld.speed = 0
+        isUserInteractionEnabled = false
+        music.removeFromParent()
+        
         // gameover label on screen
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "GameOver!"
+        if currentGameState == .gameOver {
+            myLabel.text = "GameOver!"
+        } else if currentGameState == .win {
+            myLabel.text = "Final Score: " + String(player!.score!)
+        }
         myLabel.fontSize = 65
         myLabel.position = camera!.position
         self.addChild(myLabel)
         
-        //game state
         currentGameState = .gameOver
-        physicsWorld.speed = 0
-        isUserInteractionEnabled = false
-        music.removeFromParent()
+    }
+    
+    func tileMapCollision(tileMap: SKTileMapNode) {
+        let tileSize = tileMap.tileSize
+        let halfWidth = CGFloat(tileMap.numberOfColumns) / 2.0 * tileSize.width
+        let halfHeight = CGFloat(tileMap.numberOfRows) / 2.0 * tileSize.height
+
+        for col in 0..<tileMap.numberOfColumns {
+            for row in 0..<tileMap.numberOfRows {
+                let tileDefinition = tileMap.tileDefinition(atColumn: col, row: row)
+                let isEdgeTile = tileDefinition?.userData?["edgeTile"] as? Bool
+                let isDoorTile = tileDefinition?.userData?["door"] as? Bool
+                if (isEdgeTile ?? false) || (isDoorTile ?? false) {
+                    let x = CGFloat(col) * tileSize.width - halfWidth
+                    let y = CGFloat(row) * tileSize.height - halfHeight
+                    let rect = CGRect(x: 0, y: 0, width: tileSize.width, height: tileSize.height)
+                    let tileNode = SKShapeNode(rect: rect)
+                    tileNode.name = "wall"
+                    if isDoorTile ?? false {
+                        tileNode.name = "door"
+                    }
+                    tileNode.alpha = 0
+                    tileNode.position = CGPoint(x: x, y: y)
+                    tileNode.physicsBody = SKPhysicsBody.init(rectangleOf: tileSize, center: CGPoint(x: tileSize.width / 2.0, y: tileSize.height / 2.0))
+                    tileNode.physicsBody?.isDynamic = false
+                    tileNode.physicsBody?.restitution = 0
+                    tileNode.physicsBody?.categoryBitMask = bitMask.wall
+                    tileNode.physicsBody?.collisionBitMask = bitMask.none
+                    tileNode.physicsBody?.contactTestBitMask = bitMask.player
+                    tileMap.addChild(tileNode)
+                }
+            }
+        }
     }
     
     func objectDetection() {
@@ -229,15 +292,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let column = objects?.tileColumnIndex(fromPosition: position)
         let row = (objects?.tileRowIndex(fromPosition: position))! - 1
         let tile = objects?.tileDefinition(atColumn: column!, row: row)
-        handleObject(tile: tile)
-    }
-    
-    func handleObject(tile: SKTileDefinition?) {
-        if tile == nil {
-            return
-        }
-        if tile!.name == "peaks_1" {
+        
+        //handle interaction
+        if let _ = tile?.userData?.value(forKey: "spikeTrap") {
             player?.hit(damage: 5, staggerTimer: 0.2)
+        } else if let _ = tile?.userData?.value(forKey: "silverKey") {
+            objects?.setTileGroup(nil, forColumn: column!, row: row)
+            player?.key = true
+            
+            //sound effect
+            let sfx = SKAction.playSoundFileNamed("key_pickup.mp3", waitForCompletion: false)
+            player!.player!.run(sfx)
+        } else if tile?.userData?.value(forKey: "door") != nil && player!.key {
+            objects?.setTileGroup(nil, forColumn: column!, row: row)
+        } else if tile?.userData?.value(forKey: "silverChest") != nil && player!.key {
+            let tileSet = SKTileSet(named: "dungeon_tools")
+            objects?.setTileGroup(tileSet?.tileGroups[4], forColumn: column!, row: row)
+            player?.maxScore += tile?.userData?.value(forKey: "score") as! Int
+            
+            // sound effect
+            let sfx = SKAction.playSoundFileNamed("chest_open_gold.mp3", waitForCompletion: false)
+            player!.player!.run(sfx)
         }
     }
 }
