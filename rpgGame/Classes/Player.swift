@@ -35,6 +35,7 @@ class Player {
     var mana: CGFloat?
     let maxStamina: CGFloat = 100
     var stamina: CGFloat?
+    var key:Bool = false
     
     //animations
     var startTime = NSDate()
