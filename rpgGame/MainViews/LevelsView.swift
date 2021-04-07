@@ -15,7 +15,7 @@ struct LevelsView: View {
             BackgroundView()
             
             VStack{
-                Text("LEVEL 1")
+                Text("Tutorial")
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 300, height: 30, alignment: .center)
@@ -25,6 +25,20 @@ struct LevelsView: View {
                     .cornerRadius(8)
                     .onTapGesture {
                         viewRouter.currentPage = .Tutorial1View
+                        viewRouter.level = 0
+                    }
+                
+                Text("LEVEL 1")
+                    .font(.system(size: 22, weight: .heavy, design: .rounded))
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 30, alignment: .center)
+                    .transition(.move(edge: .leading))
+                    .padding()
+                    .border(Color.white, width: 3)
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        viewRouter.currentPage = .GameView
+                        viewRouter.level = 1
                     }
                 
                 Text("LEVEL 2")
@@ -36,17 +50,7 @@ struct LevelsView: View {
                     .border(Color.white, width: 3)
                     .cornerRadius(8)
                     .onTapGesture {
-                    }
-                
-                Text("LEVEL 3")
-                    .font(.system(size: 22, weight: .heavy, design: .rounded))
-                    .foregroundColor(.white)
-                    .frame(width: 300, height: 30, alignment: .center)
-                    .transition(.move(edge: .leading))
-                    .padding()
-                    .border(Color.white, width: 3)
-                    .cornerRadius(8)
-                    .onTapGesture {
+                        viewRouter.currentPage = .GameView
                     }
                 Text("BACK")
                     .font(.system(size: 22, weight: .heavy, design: .rounded))

@@ -25,8 +25,9 @@
 		9278B75E25DB3A5B00E4EB99 /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9278B75D25DB3A5B00E4EB99 /* PauseMenu.swift */; };
 		92F1863825D2045300F46216 /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863725D2045300F46216 /* GameCenter.swift */; };
 		92F1863D25D208E300F46216 /* GameCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863C25D208E300F46216 /* GameCenterView.swift */; };
+		990773E1261D42C400B23431 /* Level_0.sks in Resources */ = {isa = PBXBuildFile; fileRef = 990773E0261D42C400B23431 /* Level_0.sks */; };
 		992FA56D25D34E8A00C72FCB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FA56A25D34E8A00C72FCB /* GameScene.swift */; };
-		992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 992FA56C25D34E8A00C72FCB /* GameScene.sks */; };
+		992FA56F25D34E8A00C72FCB /* Level_1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 992FA56C25D34E8A00C72FCB /* Level_1.sks */; };
 		994A0B91260A6DBD00F074D1 /* dungeon.sks in Resources */ = {isa = PBXBuildFile; fileRef = 994A0B8F260A6DBD00F074D1 /* dungeon.sks */; };
 		994A0B92260A6DBD00F074D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 994A0B90260A6DBD00F074D1 /* Assets.xcassets */; };
 		994A0BA0260AD37600F074D1 /* Everlasting-Snow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 994A0B9F260AD37600F074D1 /* Everlasting-Snow.mp3 */; };
@@ -85,8 +86,9 @@
 		9278B75D25DB3A5B00E4EB99 /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
 		92F1863725D2045300F46216 /* GameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
 		92F1863C25D208E300F46216 /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
+		990773E0261D42C400B23431 /* Level_0.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level_0.sks; sourceTree = "<group>"; };
 		992FA56A25D34E8A00C72FCB /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		992FA56C25D34E8A00C72FCB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		992FA56C25D34E8A00C72FCB /* Level_1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level_1.sks; sourceTree = "<group>"; };
 		994A0B8F260A6DBD00F074D1 /* dungeon.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = dungeon.sks; sourceTree = "<group>"; };
 		994A0B90260A6DBD00F074D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		994A0B9F260AD37600F074D1 /* Everlasting-Snow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Everlasting-Snow.mp3"; sourceTree = "<group>"; };
@@ -222,7 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				994A0B8E260A6DA900F074D1 /* Tileset */,
-				992FA56C25D34E8A00C72FCB /* GameScene.sks */,
+				992FA56C25D34E8A00C72FCB /* Level_1.sks */,
+				990773E0261D42C400B23431 /* Level_0.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -360,7 +363,7 @@
 				995488A325EF922300C518B8 /* ProjectileAction.sks in Resources */,
 				994A0BBB260AE2B800F074D1 /* player_damaged2.wav in Resources */,
 				99A948A425EF579A00B71509 /* bone_impact.mp3 in Resources */,
-				992FA56F25D34E8A00C72FCB /* GameScene.sks in Resources */,
+				992FA56F25D34E8A00C72FCB /* Level_1.sks in Resources */,
 				99F000D125EEF3DC00C9EC6A /* flesh_hit.mp3 in Resources */,
 				99A948AE25EF740500B71509 /* WolfActions.sks in Resources */,
 				994A0BBD260AE2B800F074D1 /* player_damaged3.wav in Resources */,
@@ -369,6 +372,7 @@
 				99A948B325EF87BC00B71509 /* BatActions.sks in Resources */,
 				994A0BDA260AE83D00F074D1 /* wolf_aggroed.mp3 in Resources */,
 				994A0BAF260ADA3A00F074D1 /* bite.mp3 in Resources */,
+				990773E1261D42C400B23431 /* Level_0.sks in Resources */,
 				99A948A325EF579A00B71509 /* bone_breaks.mp3 in Resources */,
 				99A9489325EF4A8F00B71509 /* axe_swing2.mp3 in Resources */,
 				9955AD3F261477D400445C3B /* key_pickup.mp3 in Resources */,

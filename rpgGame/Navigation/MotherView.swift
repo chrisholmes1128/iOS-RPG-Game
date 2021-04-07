@@ -33,7 +33,7 @@ struct MotherView: View {
             case .ReadyToPlayView:
                 ReadyToPlayView().transition(.scale)
             case .GameView:
-                GameView(started: Binding.constant(true)).transition(.scale)
+                GameView(started: Binding.constant(true), level: viewRouter.level).transition(.scale)
             case .PauseMenuView:
                 PauseMenuView(pauseMenuShowing: Binding.constant(true)).transition(.scale)
         }

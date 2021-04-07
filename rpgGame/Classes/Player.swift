@@ -28,7 +28,7 @@ class Player {
     let attackDamage: CGFloat = 20
     let attackRange: CGFloat = 100
     let playerSpeed: CGFloat = 150.0
-    let playerDashDistance: CGFloat = 100.0
+    let playerDashDistance: CGFloat = 200.0
     let maxHealth: CGFloat = 100
     var health: CGFloat?
     let maxMana: CGFloat = 100
@@ -130,7 +130,7 @@ class Player {
         
         //animation
         startTime = NSDate()
-        cooldown = 0.3
+        cooldown = 1.0
         currentAction = .dash
         player!.removeAllActions()
         player!.run(SKAction(named: "warrior_dash")!)
@@ -272,11 +272,11 @@ class Player {
                 health! += 0.05
             }
             if(stamina! < maxStamina){
-                stamina! += 0.5
+                stamina! += 0.2
             }
         } else {
             if(stamina! < maxStamina){
-                stamina! += 0.1
+                stamina! += 0.05
             }
         }
         
