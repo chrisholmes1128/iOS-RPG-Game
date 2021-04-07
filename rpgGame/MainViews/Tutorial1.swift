@@ -19,7 +19,7 @@ struct Tutorial1View: View {
                 
                 Text("Tutorial: Part 1")
                     .underline()
-                    .font(.system(size: 22, weight: .heavy, design: .rounded))
+                    .font(.system(size: 32, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 300, height: 30, alignment: .center)
                     .transition(.move(edge: .leading))
@@ -28,18 +28,18 @@ struct Tutorial1View: View {
     
                 
                 Text("To Attack an Enemy.. Just Tap the Screen!")
-                    .font(.system(size: 18, weight: .heavy, design: .rounded))
+                    .font(.system(size: 25, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
-                    .frame(width: 500, height: 30, alignment: .center)
+                    .frame(width: 1000, height: 30, alignment: .center)
                     .transition(.move(edge: .leading))
                     .cornerRadius(8)
                 
                 attackAnimation()
                 
                 Text("Tip: Remember to get in range of enemy before attacking ")
-                    .font(.system(size: 16, weight: .heavy, design: .rounded))
+                    .font(.system(size: 25, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
-                    .frame(width: 700, height: 30, alignment: .center)
+                    .frame(width: 1000, height: 30, alignment: .center)
                     .transition(.move(edge: .leading))
                     .cornerRadius(8)
                     .padding(.bottom, 30)
@@ -48,7 +48,7 @@ struct Tutorial1View: View {
                 
                 HStack {
                     Text("BACK")
-                        .font(.system(size: 16, weight: .heavy, design: .rounded))
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .foregroundColor(.white)
                         .frame(width: 300, height: 30, alignment: .center)
                         .transition(.move(edge: .leading))
@@ -56,10 +56,10 @@ struct Tutorial1View: View {
                         .border(Color.white, width: 3)
                         .cornerRadius(8)
                         .onTapGesture {
-                            viewRouter.currentPage = .homeScreenView
+                            viewRouter.currentPage = .LevelsView
                         }
                     Text("NEXT")
-                        .font(.system(size: 16, weight: .heavy, design: .rounded))
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .foregroundColor(.white)
                         .frame(width: 300, height: 30, alignment: .center)
                         .transition(.move(edge: .leading))

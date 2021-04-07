@@ -30,10 +30,12 @@ struct MotherView: View {
                 Tutorial2View().transition(.scale)
             case .Tutorial3View:
                 Tutorial3View().transition(.scale)
+            case .Tutorial4View:
+                Tutorial4View().transition(.scale)
             case .ReadyToPlayView:
                 ReadyToPlayView().transition(.scale)
             case .GameView:
-                GameView(started: Binding.constant(true)).transition(.scale)
+                GameView(started: Binding.constant(true), level: viewRouter.level).transition(.scale)
             case .PauseMenuView:
                 PauseMenuView(pauseMenuShowing: Binding.constant(true)).transition(.scale)
         }

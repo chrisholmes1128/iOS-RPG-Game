@@ -16,9 +16,19 @@ struct bitMask {
     static let enemy:UInt32 = 0x00000010
     static let projectile:UInt32 = 0x00000011
     static let wall:UInt32 = 0x00000100
+    static let object:UInt32 = 0x00000101
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    /* Make a Class method to load levels */
+    class func level(_ levelNumber: Int) -> GameScene? {
+        guard let scene = GameScene(fileNamed: "Level_\(levelNumber)") else {
+            return nil
+        }
+        return scene
+    }
+    
     // MARK: - Instance Variables
     @Published var gameIsPaused = false {
         didSet {
@@ -36,6 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var objects: SKTileMapNode?
     
     //stats
+    let data = UserDefaults.standard
     var touchTime = NSDate()
     var currentGameState = gameState.playing
     enum gameState {
@@ -120,8 +131,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func doorCollision(nodeA: SKNode, nodeB: SKNode) {
-        if nodeA.name == "player" && nodeB.name == "door" && player!.key {
-            nodeB.removeFromParent()
+        if nodeA.name == "player" && nodeB.name == "door" {
+            if player!.key {
+                nodeB.removeFromParent()
+            } else {
+                player!.SpeechBubble(text: "The door is locked")
+            }
         }
     }
     
@@ -134,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         joystick?.position = location
         joystick?.alpha = 1
         
-        touchTime = NSDate()
+        touchTime = NSDate()        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -230,6 +245,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         camera?.position = (player?.player!.position)!
     }
     
+    func pause() {
+        if(currentGameState != .paused){
+        // stop physics and touch
+        physicsWorld.speed = 0
+        isUserInteractionEnabled = false
+        
+        // pause label on screen
+        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+        myLabel.name = "label"
+        myLabel.text = "Paused!"
+        myLabel.fontSize = 65
+        myLabel.position = camera!.position
+        self.addChild(myLabel)
+        
+        currentGameState = .paused
+        } else {
+            // resume
+            physicsWorld.speed = 1
+            isUserInteractionEnabled = true
+            
+            let myLabel = self.childNode(withName: "label")
+            myLabel?.removeFromParent()
+            currentGameState = .playing
+        }
+        print(currentGameState)
+    }
+    
     func gameOver() {
         //update one last cycle then stop
         player?.Update()
@@ -246,12 +288,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             myLabel.text = "GameOver!"
         } else if currentGameState == .win {
             myLabel.text = "Final Score: " + String(player!.score!)
+            player!.SpeechBubble(text: "E A S Y")
         }
         myLabel.fontSize = 65
         myLabel.position = camera!.position
         self.addChild(myLabel)
         
         currentGameState = .gameOver
+        
+        //store scores
+        var scoreHistory: [Int] = data.object(forKey: self.name!) as? [Int] ?? []
+        scoreHistory.append(player!.score!)
+        data.set(scoreHistory, forKey: self.name!)
+        data.synchronize()
+        print(data.object(forKey: self.name!) as? [Int] as Any)
     }
     
     func tileMapCollision(tileMap: SKTileMapNode) {
@@ -303,9 +353,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //sound effect
             let sfx = SKAction.playSoundFileNamed("key_pickup.mp3", waitForCompletion: false)
             player!.player!.run(sfx)
-        } else if tile?.userData?.value(forKey: "door") != nil && player!.key {
-            objects?.setTileGroup(nil, forColumn: column!, row: row)
-        } else if tile?.userData?.value(forKey: "silverChest") != nil && player!.key {
+            
+            //speech
+            player!.SpeechBubble(text: "A key!")
+        } else if tile?.userData?.value(forKey: "door") != nil {
+            if player!.key {
+                objects?.setTileGroup(nil, forColumn: column!, row: row)
+            }
+        } else if tile?.userData?.value(forKey: "silverChest") != nil{
             let tileSet = SKTileSet(named: "dungeon_tools")
             objects?.setTileGroup(tileSet?.tileGroups[4], forColumn: column!, row: row)
             player?.maxScore += tile?.userData?.value(forKey: "score") as! Int
@@ -313,6 +368,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // sound effect
             let sfx = SKAction.playSoundFileNamed("chest_open_gold.mp3", waitForCompletion: false)
             player!.player!.run(sfx)
+            
+            //speech
+            player!.SpeechBubble(text: "Lucky day!")
+            
+            //tutorial level exception
+            if(self.name == "Tutorial"){
+                self.currentGameState = .win
+                self.gameOver()
+            }
         }
     }
 }

@@ -45,6 +45,7 @@ class Witch: Enemy {
     
     override func Death() {
         super.Death()
+        target?.SpeechBubble(text: "Yikes.")
         gameScene.currentGameState = .win
         gameScene.gameOver()
     }

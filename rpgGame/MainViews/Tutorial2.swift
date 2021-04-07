@@ -19,7 +19,7 @@ struct Tutorial2View: View {
                 
                 Text("Tutorial: Part 2")
                     .underline()
-                    .font(.system(size: 22, weight: .heavy, design: .rounded))
+                    .font(.system(size: 32, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 300, height: 30, alignment: .center)
                     .transition(.move(edge: .leading))
@@ -27,27 +27,19 @@ struct Tutorial2View: View {
                     .cornerRadius(8)
     
                 Text("To Run, place your finger on the screen and move the toggle that displays")
-                    .font(.system(size: 18, weight: .heavy, design: .rounded))
+                    .font(.system(size: 25, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
-                    .frame(width: 800, height: 30, alignment: .center)
+                    .frame(width: 1000, height: 30, alignment: .center)
                     .transition(.move(edge: .leading))
                     .cornerRadius(8)
                 
                 walkAnimation()
                 
-                Text("Tip: To move quickly, slide your finger along the screen to sprint")
-                    .font(.system(size: 16, weight: .heavy, design: .rounded))
-                    .foregroundColor(.white)
-                    .frame(width: 800, height: 30, alignment: .center)
-                    .transition(.move(edge: .leading))
-                    .cornerRadius(8)
-                    .padding(.bottom, 30)
-                
                 Spacer()
                 
                 HStack {
                     Text("BACK")
-                        .font(.system(size: 16, weight: .heavy, design: .rounded))
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .foregroundColor(.white)
                         .frame(width: 300, height: 30, alignment: .center)
                         .transition(.move(edge: .leading))
@@ -58,7 +50,7 @@ struct Tutorial2View: View {
                             viewRouter.currentPage = .Tutorial1View
                         }
                     Text("NEXT")
-                        .font(.system(size: 16, weight: .heavy, design: .rounded))
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .foregroundColor(.white)
                         .frame(width: 300, height: 30, alignment: .center)
                         .transition(.move(edge: .leading))
