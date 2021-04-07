@@ -11,7 +11,10 @@ struct ScoreView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
+        
         ZStack {
+            let levels = getLevels()
+            
             BackgroundView()
             VStack{
                 
@@ -19,6 +22,27 @@ struct ScoreView: View {
                     .font(.system(size: 40, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .padding()
+                
+                HStack(spacing: 20){
+                    ForEach(levels.indices) { i in
+                        VStack{
+                            let scores = getScores(key: levels[i])
+                            //title
+                            Text(levels[i])
+                                .font(.system(size: 30, weight: .heavy, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding()
+                            //scores
+                            ForEach(scores.indices) {i in
+                                Text("\(i+1) | \(scores[i])")
+                                    .font(.system(size: 20, weight: .heavy, design: .rounded))
+                                    .foregroundColor(.white)
+                            }
+                            
+                        }
+                    }
+                }
+                
                 
                 Button(action: {
                     withAnimation {
@@ -29,6 +53,20 @@ struct ScoreView: View {
                 }.padding()
             }
         }
+    }
+}
+
+extension ScoreView {
+    func getLevels() -> [String] {
+        let levels = ["Tutorial", "Level1", "Level2"]
+        return levels
+    }
+    
+    func getScores(key: String) -> [Int] {
+        let data = UserDefaults.standard
+        var scores:[Int] = data.array(forKey: key) as? [Int] ?? []
+        scores.sort(by: >)
+        return scores
     }
 }
 

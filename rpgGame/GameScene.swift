@@ -45,6 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var objects: SKTileMapNode?
     
     //stats
+    let data = UserDefaults.standard
     var touchTime = NSDate()
     var currentGameState = gameState.playing
     enum gameState {
@@ -288,6 +289,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(myLabel)
         
         currentGameState = .gameOver
+        
+        //store scores
+        var scoreHistory: [Int] = data.object(forKey: self.name!) as? [Int] ?? []
+        scoreHistory.append(player!.score!)
+        data.set(scoreHistory, forKey: self.name!)
+        data.synchronize()
+        print(data.object(forKey: self.name!) as? [Int] as Any)
     }
     
     func tileMapCollision(tileMap: SKTileMapNode) {
