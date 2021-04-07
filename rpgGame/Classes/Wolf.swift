@@ -44,4 +44,9 @@ class Wolf: Enemy {
         let sfx = SKAction.playSoundFileNamed("wolf_aggroed.mp3", waitForCompletion: false)
         enemy!.run(sfx)
     }
+    
+    override func Death() {
+        super.Death()
+        target?.SpeechBubble(text: "No Crazy Doggo Allowed.")
+    }
 }

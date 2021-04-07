@@ -39,4 +39,9 @@ class Bat: Enemy {
         enemy.physicsBody?.collisionBitMask = bitMask.wall
         enemy.physicsBody?.contactTestBitMask = bitMask.none
     }
+    
+    override func Death() {
+        super.Death()
+        target?.SpeechBubble(text: "Soup Ingredient?")
+    }
 }

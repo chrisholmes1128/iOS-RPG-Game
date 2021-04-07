@@ -12,35 +12,36 @@ class Player {
     //textures
     var gameScene: GameScene
     var player: SKSpriteNode?
-    var healthBar: SKSpriteNode?
-    var healthBarWidth: CGFloat?
-    var staminaBar: SKSpriteNode?
-    var staminaBarWidth: CGFloat?
-    var scoreLabel: SKLabelNode?
+    private var healthBar: SKSpriteNode?
+    private var healthBarWidth: CGFloat?
+    private var staminaBar: SKSpriteNode?
+    private var staminaBarWidth: CGFloat?
+    private var scoreLabel: SKLabelNode?
+    private var speechLabel = SKLabelNode(fontNamed:"Chalkduster")
     
     //stats
     var maxScore: Int = 1000
     var score: Int?
-    var scoreStartTime = NSDate()
-    var iframe: Double = 0.5 // invincible frame
-    var iframStartTime = NSDate()
-    var elapsedIframeTime: Double = 0.0
-    let attackDamage: CGFloat = 20
-    let attackRange: CGFloat = 100
-    let playerSpeed: CGFloat = 150.0
-    let playerDashDistance: CGFloat = 200.0
-    let maxHealth: CGFloat = 100
-    var health: CGFloat?
-    let maxMana: CGFloat = 100
-    var mana: CGFloat?
-    let maxStamina: CGFloat = 100
-    var stamina: CGFloat?
+    private var scoreStartTime = NSDate()
+    private var iframe: Double = 0.5 // invincible frame
+    private var iframStartTime = NSDate()
+    private var elapsedIframeTime: Double = 0.0
+    private let attackDamage: CGFloat = 20
+    private let attackRange: CGFloat = 100
+    private let playerSpeed: CGFloat = 150.0
+    private let playerDashDistance: CGFloat = 200.0
+    private let maxHealth: CGFloat = 100
+    private var health: CGFloat?
+    private let maxMana: CGFloat = 100
+    private var mana: CGFloat?
+    private let maxStamina: CGFloat = 100
+    private var stamina: CGFloat?
     var key:Bool = false
     
     //animations
-    var startTime = NSDate()
-    var cooldown: Double = 0.0
-    var elapsedTime: Double = 0.0
+    private var startTime = NSDate()
+    private var cooldown: Double = 0.0
+    private var elapsedTime: Double = 0.0
     var currentAction = playerAction.idle
     enum playerAction {
         case idle
@@ -73,6 +74,9 @@ class Player {
         healthBarWidth = healthBar?.size.width
         staminaBar = gameScene.childNode(withName: "/camera/healthBar/stamina") as? SKSpriteNode
         staminaBarWidth = staminaBar?.size.width
+        gameScene.addChild(speechLabel)
+        speechLabel.fontSize = 30
+        speechLabel.alpha = 0
         
         //Score
         self.score = self.maxScore
@@ -212,6 +216,9 @@ class Player {
                 return
             }
             
+            //speech
+            SpeechBubble(text: "Ouch!")
+            
             // animation
             player!.removeAllActions()
             player!.run(SKAction(named: "warrior_hit")!)
@@ -250,6 +257,9 @@ class Player {
         
         //update gui
         UserInterface()
+        
+        //speech
+        SpeechBubble(text: "Is This The End...")
     }
     
     func UserInterface() {
@@ -257,9 +267,24 @@ class Player {
         healthBar?.size.width = healthBarWidth! * health! / maxHealth
         staminaBar?.size.width = staminaBarWidth! * stamina! / maxStamina
         
+        //speech bubble
+        speechLabel.position = player!.position
+        speechLabel.position.y += (player?.size.height)! * 0.4
+        
         //Score
         score = maxScore - Int(scoreStartTime.timeIntervalSinceNow * -1)
         scoreLabel!.text = "Score: " + String(Int(score!))
+    }
+    
+    func SpeechBubble(text: String) {
+        speechLabel.removeAllActions()
+        speechLabel.text = text
+        speechLabel.alpha = 1
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+            let fadeout = SKAction.fadeOut(withDuration: 2)
+            speechLabel.run(fadeout)
+        }
     }
     
     func Update() {
@@ -269,7 +294,7 @@ class Player {
         // health & stamina regen
         if(currentAction == .idle) {
             if(health! < maxHealth){
-                health! += 0.05
+                //health! += 0.05
             }
             if(stamina! < maxStamina){
                 stamina! += 0.2

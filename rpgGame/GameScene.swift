@@ -16,6 +16,7 @@ struct bitMask {
     static let enemy:UInt32 = 0x00000010
     static let projectile:UInt32 = 0x00000011
     static let wall:UInt32 = 0x00000100
+    static let object:UInt32 = 0x00000101
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -130,8 +131,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func doorCollision(nodeA: SKNode, nodeB: SKNode) {
-        if nodeA.name == "player" && nodeB.name == "door" && player!.key {
-            nodeB.removeFromParent()
+        if nodeA.name == "player" && nodeB.name == "door" {
+            if player!.key {
+                nodeB.removeFromParent()
+            } else {
+                player!.SpeechBubble(text: "The door is locked")
+            }
         }
     }
     
@@ -283,6 +288,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             myLabel.text = "GameOver!"
         } else if currentGameState == .win {
             myLabel.text = "Final Score: " + String(player!.score!)
+            player!.SpeechBubble(text: "E A S Y")
         }
         myLabel.fontSize = 65
         myLabel.position = camera!.position
@@ -347,8 +353,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //sound effect
             let sfx = SKAction.playSoundFileNamed("key_pickup.mp3", waitForCompletion: false)
             player!.player!.run(sfx)
-        } else if tile?.userData?.value(forKey: "door") != nil && player!.key {
-            objects?.setTileGroup(nil, forColumn: column!, row: row)
+            
+            //speech
+            player!.SpeechBubble(text: "A key!")
+        } else if tile?.userData?.value(forKey: "door") != nil {
+            if player!.key {
+                objects?.setTileGroup(nil, forColumn: column!, row: row)
+            }
         } else if tile?.userData?.value(forKey: "silverChest") != nil{
             let tileSet = SKTileSet(named: "dungeon_tools")
             objects?.setTileGroup(tileSet?.tileGroups[4], forColumn: column!, row: row)
@@ -357,6 +368,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // sound effect
             let sfx = SKAction.playSoundFileNamed("chest_open_gold.mp3", waitForCompletion: false)
             player!.player!.run(sfx)
+            
+            //speech
+            player!.SpeechBubble(text: "Lucky day!")
             
             //tutorial level exception
             if(self.name == "Tutorial"){

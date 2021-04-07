@@ -38,4 +38,9 @@ class Skeleton: Enemy {
         enemy.physicsBody?.collisionBitMask = bitMask.wall
         enemy.physicsBody?.contactTestBitMask = bitMask.none
     }
+    
+    override func Death() {
+        super.Death()
+        target?.SpeechBubble(text: "How Could You Die Twice?")
+    }
 }
