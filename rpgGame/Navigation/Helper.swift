@@ -19,5 +19,6 @@ enum Page {
     case Tutorial1View
     case Tutorial2View
     case Tutorial3View
+    case Tutorial4View
     case ReadyToPlayView
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Tutorial1View: View {
+struct Tutorial4View: View {
     @EnvironmentObject var viewRouter: ViewRouter
 
     var body: some View {
@@ -15,9 +15,8 @@ struct Tutorial1View: View {
             BackgroundView()
             
             VStack{
-                Spacer()
                 
-                Text("Tutorial: Part 1")
+                Text("Tutorial: Part 4")
                     .underline()
                     .font(.system(size: 32, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
@@ -25,26 +24,51 @@ struct Tutorial1View: View {
                     .transition(.move(edge: .leading))
                     .padding()
                     .cornerRadius(8)
-    
                 
-                Text("To Attack an Enemy.. Just Tap the Screen!")
+                Text("Make sure to pay attention to your health and stamina bar..")
                     .font(.system(size: 25, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 1000, height: 30, alignment: .center)
                     .transition(.move(edge: .leading))
                     .cornerRadius(8)
                 
-                attackAnimation()
+                Text("This will be visable in the top left corner of the screen during gameplay")
+                    .font(.system(size: 25, weight: .heavy, design: .rounded))
+                    .foregroundColor(.white)
+                    .frame(width: 1000, height: 30, alignment: .center)
+                    .transition(.move(edge: .leading))
+                    .cornerRadius(8)
                 
-                Text("Tip: Remember to get in range of enemy before attacking ")
+                Spacer()
+                
+                Group{
+                    HStack{
+                        Text("   Health ->")
+                            .font(.system(size: 22, weight: .heavy, design: .rounded))
+                            .foregroundColor(.white)
+                        Image("Health")
+                            .resizable()
+                            .frame(width: 400, height: 40, alignment: .trailing)
+                    }
+                    HStack{
+                        Text("Stamina ->")
+                            .font(.system(size: 22, weight: .heavy, design: .rounded))
+                            .foregroundColor(.white)
+                        Image("Stamina")
+                            .resizable()
+                            .frame(width: 400, height: 40, alignment: .trailing)
+                    }
+                }
+                
+                Spacer()
+                
+                Text("Tip: Sprinting or attacking too much will deplete your stamina quicker")
                     .font(.system(size: 25, weight: .heavy, design: .rounded))
                     .foregroundColor(.white)
                     .frame(width: 1000, height: 30, alignment: .center)
                     .transition(.move(edge: .leading))
                     .cornerRadius(8)
                     .padding(.bottom, 30)
-                
-                Spacer()
                 
                 HStack {
                     Text("BACK")
@@ -56,7 +80,7 @@ struct Tutorial1View: View {
                         .border(Color.white, width: 3)
                         .cornerRadius(8)
                         .onTapGesture {
-                            viewRouter.currentPage = .LevelsView
+                            viewRouter.currentPage = .Tutorial3View
                         }
                     Text("NEXT")
                         .font(.system(size: 20, weight: .heavy, design: .rounded))
@@ -67,42 +91,17 @@ struct Tutorial1View: View {
                         .border(Color.white, width: 3)
                         .cornerRadius(8)
                         .onTapGesture {
-                            viewRouter.currentPage = .Tutorial2View
+                            viewRouter.currentPage = .ReadyToPlayView
                         }
                 }
-                
-                Spacer()
             }
         }
     }
 }
 
-var attackImages : [UIImage]! = [UIImage(named: "Warrior_Attack_1")!, UIImage(named: "Warrior_Attack_2")!, UIImage(named: "Warrior_Attack_3")!, UIImage(named: "Warrior_Attack_4")!, UIImage(named: "Warrior_Attack_5")!, UIImage(named: "Warrior_Attack_6")!, UIImage(named: "Warrior_Attack_7")!, UIImage(named: "Warrior_Attack_8")! , UIImage(named: "Warrior_Attack_9")!, UIImage(named: "Warrior_Attack_10")!, UIImage(named: "Warrior_Attack_11")!, UIImage(named: "Warrior_Attack_12")!]
-
-
-let animatedAttackImage = UIImage.animatedImage(with: attackImages, duration: 1.5)
-
-struct attackAnimation: UIViewRepresentable {
-
-    func makeUIView(context: Self.Context) -> UIView {
-        let someView = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 700))
-        let someImage = UIImageView(frame: CGRect(x: 520, y: 100, width: 360, height: 300))
-        someImage.clipsToBounds = true
-        someImage.layer.cornerRadius = 20
-        someImage.autoresizesSubviews = true
-        someImage.contentMode = UIView.ContentMode.scaleAspectFill
-        someImage.image = animatedAttackImage
-        someView.addSubview(someImage)
-        return someView
-    }
-
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<attackAnimation>) {
-
-    }
-}
-struct Tutorial1View_Previews: PreviewProvider {
+struct Tutorial4View_Previews: PreviewProvider {
     static var previews: some View {
-        Tutorial1View()
+        Tutorial4View()
     }
 }
 

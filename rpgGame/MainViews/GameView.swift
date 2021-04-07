@@ -32,6 +32,8 @@ struct GameView: View {
                         .resizable()
                         .colorInvert()
                         .frame(width: 40, height: 40, alignment: .trailing)
+                        .padding(.leading, 200)
+                        .padding(.bottom, 220)
                 }
                 
                 //exit button
@@ -44,6 +46,8 @@ struct GameView: View {
                         .resizable()
                         .colorInvert()
                         .frame(width: 40, height: 40, alignment: .trailing)
+                        .padding(.trailing, 10)
+                        .padding(.bottom, 220)
                 }
             }.padding(.bottom, 1620 / 2 - 100)
             .padding(.leading, 2160 / 2 - 160)

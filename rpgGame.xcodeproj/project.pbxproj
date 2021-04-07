@@ -18,10 +18,11 @@
 		9202D95425CCAA1E002B2EDF /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D94E25CCAA1E002B2EDF /* MotherView.swift */; };
 		9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D94F25CCAA1E002B2EDF /* ScoreView.swift */; };
 		9202D95A25CCAA26002B2EDF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9202D95925CCAA26002B2EDF /* BackgroundView.swift */; };
-		92350CB42614F3560060FC30 /* Tutorial3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92350CB12614F3560060FC30 /* Tutorial3.swift */; };
+		92350CB42614F3560060FC30 /* Tutorial4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92350CB12614F3560060FC30 /* Tutorial4.swift */; };
 		92350CB52614F3560060FC30 /* Tutorial2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92350CB22614F3560060FC30 /* Tutorial2.swift */; };
 		92350CB62614F3560060FC30 /* Tutorial1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92350CB32614F3560060FC30 /* Tutorial1.swift */; };
 		92350CB92614F3690060FC30 /* ReadyToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92350CB82614F3690060FC30 /* ReadyToPlayView.swift */; };
+		925EEFC3261DFFF6009DBBBA /* Tutorial3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EEFC2261DFFF6009DBBBA /* Tutorial3.swift */; };
 		9278B75E25DB3A5B00E4EB99 /* PauseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9278B75D25DB3A5B00E4EB99 /* PauseMenu.swift */; };
 		92F1863825D2045300F46216 /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863725D2045300F46216 /* GameCenter.swift */; };
 		92F1863D25D208E300F46216 /* GameCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F1863C25D208E300F46216 /* GameCenterView.swift */; };
@@ -79,10 +80,11 @@
 		9202D94E25CCAA1E002B2EDF /* MotherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
 		9202D94F25CCAA1E002B2EDF /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		9202D95925CCAA26002B2EDF /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
-		92350CB12614F3560060FC30 /* Tutorial3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial3.swift; sourceTree = "<group>"; };
+		92350CB12614F3560060FC30 /* Tutorial4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial4.swift; sourceTree = "<group>"; };
 		92350CB22614F3560060FC30 /* Tutorial2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial2.swift; sourceTree = "<group>"; };
 		92350CB32614F3560060FC30 /* Tutorial1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial1.swift; sourceTree = "<group>"; };
 		92350CB82614F3690060FC30 /* ReadyToPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadyToPlayView.swift; sourceTree = "<group>"; };
+		925EEFC2261DFFF6009DBBBA /* Tutorial3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorial3.swift; sourceTree = "<group>"; };
 		9278B75D25DB3A5B00E4EB99 /* PauseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseMenu.swift; sourceTree = "<group>"; };
 		92F1863725D2045300F46216 /* GameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
 		92F1863C25D208E300F46216 /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
@@ -204,7 +206,8 @@
 				9278B75D25DB3A5B00E4EB99 /* PauseMenu.swift */,
 				92350CB32614F3560060FC30 /* Tutorial1.swift */,
 				92350CB22614F3560060FC30 /* Tutorial2.swift */,
-				92350CB12614F3560060FC30 /* Tutorial3.swift */,
+				925EEFC2261DFFF6009DBBBA /* Tutorial3.swift */,
+				92350CB12614F3560060FC30 /* Tutorial4.swift */,
 				92350CB82614F3690060FC30 /* ReadyToPlayView.swift */,
 			);
 			path = MainViews;
@@ -406,7 +409,7 @@
 				9202D95525CCAA1E002B2EDF /* ScoreView.swift in Sources */,
 				99A948A925EF73BC00B71509 /* Wolf.swift in Sources */,
 				92350CB52614F3560060FC30 /* Tutorial2.swift in Sources */,
-				92350CB42614F3560060FC30 /* Tutorial3.swift in Sources */,
+				92350CB42614F3560060FC30 /* Tutorial4.swift in Sources */,
 				9202D95425CCAA1E002B2EDF /* MotherView.swift in Sources */,
 				995FEF9F25DD44BE00A1D259 /* Player.swift in Sources */,
 				9202D91F25CCAA0F002B2EDF /* ContentView.swift in Sources */,
@@ -416,6 +419,7 @@
 				9955AD972614990F00445C3B /* HowToPlayView.swift in Sources */,
 				92350CB92614F3690060FC30 /* ReadyToPlayView.swift in Sources */,
 				9202D95125CCAA1E002B2EDF /* OptionsView.swift in Sources */,
+				925EEFC3261DFFF6009DBBBA /* Tutorial3.swift in Sources */,
 				99A948B825EF87C700B71509 /* Bat.swift in Sources */,
 				92350CB62614F3560060FC30 /* Tutorial1.swift in Sources */,
 				9954889E25EF8E6900C518B8 /* Witch.swift in Sources */,

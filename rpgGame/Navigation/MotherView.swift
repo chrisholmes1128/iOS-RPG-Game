@@ -30,6 +30,8 @@ struct MotherView: View {
                 Tutorial2View().transition(.scale)
             case .Tutorial3View:
                 Tutorial3View().transition(.scale)
+            case .Tutorial4View:
+                Tutorial4View().transition(.scale)
             case .ReadyToPlayView:
                 ReadyToPlayView().transition(.scale)
             case .GameView:
