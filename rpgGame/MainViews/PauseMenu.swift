@@ -23,7 +23,7 @@ struct PauseMenuView: View {
             if pauseMenuShowing {
                 VStack{
                     Spacer()
-                    Text("RESUME")
+                    Text("RESTART")
                         .font(.system(size: 22, weight: .heavy, design: .rounded))
                         .foregroundColor(.white)
                         .frame(width: 300, height: 30, alignment: .center)

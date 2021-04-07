@@ -49,6 +49,17 @@ struct GameView: View {
                         .padding(.trailing, 10)
                         .padding(.bottom, 220)
                 }
+                
+                Button(action: {
+                    viewRouter.currentPage = .PauseMenuView
+                }) {
+                    Image("replayButton")
+                        .resizable()
+                        .colorInvert()
+                        .frame(width: 40, height: 40, alignment: .trailing)
+                        .padding(.trailing, 10)
+                        .padding(.bottom, 220)
+                }
             }.padding(.bottom, 1620 / 2 - 100)
             .padding(.leading, 2160 / 2 - 160)
             
