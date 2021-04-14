@@ -15,8 +15,24 @@ struct TitleView: View {
     
     var body: some View {
         ZStack {
+            VStack{
+                Image("icons8-katana-50")
+                    .resizable()
+                    .colorInvert()
+                    .frame(width: 100, height: 100, alignment: .trailing)
+                    .position(x: 500, y:150)
+                
+                Image("icons8-katana-50")
+                    .resizable()
+                    .colorInvert()
+                    .frame(width: 100, height: 100, alignment: .trailing)
+                    .position(x: 500, y: -335)
+                    .rotationEffect(.degrees(180), anchor: .center)
+                    .rotation3DEffect(.degrees(180), axis: (x: 1, y: 0, z: 0))
+            }
             VStack {
                 if titleShowing {
+                    
                     VStack(spacing: 8){
                         Spacer()
                         
@@ -41,21 +57,6 @@ struct TitleView: View {
                                 }
                             }
                         
-                        Text("SETTINGS")
-                            .font(.system(size: 22, weight: .heavy, design: .rounded))
-                            .foregroundColor(.white)
-                            .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .transition(.move(edge: .leading))
-                            .padding()
-                            .border(Color.white, width: 3)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                withAnimation{
-                                    titleShowing.toggle()
-                                    viewRouter.currentPage = .optionsView
-                                }
-                            }
-                        
                         Text("SCORES")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                             .foregroundColor(.white)
@@ -71,7 +72,7 @@ struct TitleView: View {
                                 }
                             }
                         
-                        Text("HOW TO PLAY")
+                        Text("SETTINGS")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                             .foregroundColor(.white)
                             .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -82,7 +83,7 @@ struct TitleView: View {
                             .onTapGesture {
                                 withAnimation{
                                     titleShowing.toggle()
-                                    viewRouter.currentPage = .HowToPlayView
+                                    viewRouter.currentPage = .optionsView
                                 }
                             }
                         

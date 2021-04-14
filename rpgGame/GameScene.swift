@@ -173,6 +173,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //disable player control when gameover or hit
         if currentGameState == .gameOver || player?.currentAction == .hit {
+            player!.Idle()
             return
         }
         
@@ -198,10 +199,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let distance = sqrt(pow(joystickHandleLocation.x, 2) + pow(joystickHandleLocation.y, 2))
         
         //disable player control when gameover or hit
-        if currentGameState == .gameOver || player?.currentAction == .hit {
+        if  player?.currentAction == .hit {
             return
         }
+        
+        if currentGameState == .gameOver {
+            music.removeFromParent()
+        }
 
+        
         //character movement
         if elapsedTime < 0.2 {
             if distance >= 1.5{
@@ -295,6 +301,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if currentGameState == .win {
             myLabel.text = "Final Score: " + String(player!.score!)
             player!.SpeechBubble(text: "E A S Y")
+            
         }
         myLabel.fontSize = 65
         myLabel.position = camera!.position

@@ -43,6 +43,7 @@ struct ScoreView: View {
                                         Text("\(i+1).    \(scores[i])")
                                             .font(.system(size: 20, weight: .heavy, design: .rounded))
                                             .foregroundColor(.white)
+                                            .padding()
                                 }
                             }
                         }
@@ -109,13 +110,10 @@ struct ScoreView: View {
                             viewRouter.currentPage = .homeScreenView
                         }
                 }.padding(.bottom, 20)
-                
             }
-            
         }
     }
 }
-
 
 extension ScoreView {
     func getLevels() -> [String] {

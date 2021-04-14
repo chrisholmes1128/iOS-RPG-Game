@@ -22,7 +22,7 @@ struct GameView: View {
             PauseMenuView(pauseMenuShowing: $pauseMenuShowing).padding()
             
             SKViewContainer(level: self.level, scene: scene!).ignoresSafeArea()
-            
+        
             HStack(spacing: 40) {
                 //pause button
                 Button(action: {
@@ -36,21 +36,19 @@ struct GameView: View {
                         .padding(.bottom, 220)
                 }
                 
-                //exit button
                 Button(action: {
-                    scene?.removeAllActions()
-                    scene?.removeAllChildren()
-                    viewRouter.currentPage = .homeScreenView
+                    viewRouter.currentPage = .PauseMenuView
                 }) {
-                    Image("homeButton")
+                    Image("menuIcon")
                         .resizable()
-                        .colorInvert()
                         .frame(width: 40, height: 40, alignment: .trailing)
                         .padding(.trailing, 10)
                         .padding(.bottom, 220)
                 }
             }.padding(.bottom, 1620 / 2 - 100)
             .padding(.leading, 2160 / 2 - 160)
+            
+            
             
         }
     }
