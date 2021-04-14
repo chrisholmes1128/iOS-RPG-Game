@@ -24,8 +24,8 @@ class Player {
     var score: Int?
     private var scoreStartTime = NSDate()
     private var iframe: Double = 0.5 // invincible frame
-    private let attackDamage: CGFloat = 2000
-    private let attackRange: CGFloat = 100000
+    private let attackDamage: CGFloat = 20
+    private let attackRange: CGFloat = 100
     private let playerSpeed: CGFloat = 150.0
     private let playerDashDistance: CGFloat = 200.0
     private let maxHealth: CGFloat = 100
