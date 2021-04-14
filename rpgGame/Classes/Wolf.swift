@@ -47,6 +47,6 @@ class Wolf: Enemy {
     
     override func Death() {
         super.Death()
-        target?.SpeechBubble(text: "No Crazy Doggo Allowed.")
+        target?.SpeechBubble(text: "Wolf? Dog? Whatever.")
     }
 }

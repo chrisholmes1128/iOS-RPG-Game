@@ -24,10 +24,8 @@ class Player {
     var score: Int?
     private var scoreStartTime = NSDate()
     private var iframe: Double = 0.5 // invincible frame
-    private var iframStartTime = NSDate()
-    private var elapsedIframeTime: Double = 0.0
-    private let attackDamage: CGFloat = 20
-    private let attackRange: CGFloat = 100
+    private let attackDamage: CGFloat = 2000
+    private let attackRange: CGFloat = 100000
     private let playerSpeed: CGFloat = 150.0
     private let playerDashDistance: CGFloat = 200.0
     private let maxHealth: CGFloat = 100
@@ -36,7 +34,14 @@ class Player {
     private var mana: CGFloat?
     private let maxStamina: CGFloat = 100
     private var stamina: CGFloat?
+    private let regenTime: Double = 2.0
     var key:Bool = false
+        
+    //cooldown
+    private var iframStartTime = NSDate()
+    private var elapsedIframeTime: Double = 0.0
+    private var regenStartTime = NSDate()
+    private var elapsedRegenTime: Double = 0.0
     
     //animations
     private var startTime = NSDate()
@@ -87,8 +92,6 @@ class Player {
         scoreLabel!.position.y += gameScene.size.height / 2 - 100
         gameScene.camera!.addChild(scoreLabel!)
         
-        //animation
-        Idle()
     }
     
     func Move(angle: CGFloat, touch: CGPoint, joystick: SKSpriteNode) {
@@ -134,15 +137,11 @@ class Player {
         
         //animation
         startTime = NSDate()
-        cooldown = 1.0
+        cooldown = 0
         currentAction = .dash
         player!.removeAllActions()
         player!.run(SKAction(named: "warrior_dash")!)
         player!.run(animation)
-        //back to idle after dash
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            Idle()
-        }
         
         //direction
         var direction:CGFloat
@@ -198,6 +197,8 @@ class Player {
                     }
                 }
             }
+        } else if stamina! < staminaCost {
+            SpeechBubble(text: "I'm tired")
         }
     }
     
@@ -221,7 +222,9 @@ class Player {
             
             // animation
             player!.removeAllActions()
-            player!.run(SKAction(named: "warrior_hit")!)
+            let hitAnimation = SKAction(named: "warrior_hit")
+            hitAnimation?.speed = CGFloat(1 / staggerTimer)
+            player!.run(hitAnimation!)
             currentAction = .hit
             
             // pinned and release after cooldown
@@ -237,7 +240,7 @@ class Player {
     
     func Idle() {
         currentAction = .idle
-        player!.removeAllActions()
+        regenStartTime = NSDate()
         player!.run(SKAction(named: "warrior_idle")!)
     }
     
@@ -291,10 +294,15 @@ class Player {
         //UI
         UserInterface()
         
+        //Idle if no action
+        if !(player?.hasActions())! {
+            Idle()
+        }
+
         // health & stamina regen
-        if(currentAction == .idle) {
+        if(currentAction == .idle && elapsedRegenTime > regenTime) {
             if(health! < maxHealth){
-                //health! += 0.05
+                health! += 0.01
             }
             if(stamina! < maxStamina){
                 stamina! += 0.2
@@ -308,5 +316,6 @@ class Player {
         // cooldown
         elapsedTime = startTime.timeIntervalSinceNow * -1
         elapsedIframeTime = iframStartTime.timeIntervalSinceNow * -1
+        elapsedRegenTime = regenStartTime.timeIntervalSinceNow * -1
     }
 }

@@ -51,6 +51,7 @@ struct LevelsView: View {
                     .cornerRadius(8)
                     .onTapGesture {
                         viewRouter.currentPage = .GameView
+                        viewRouter.level = 2
                     }
                 Text("BACK")
                     .font(.system(size: 22, weight: .heavy, design: .rounded))

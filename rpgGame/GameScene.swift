@@ -26,6 +26,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let scene = GameScene(fileNamed: "Level_\(levelNumber)") else {
             return nil
         }
+        //resize scene base on device
+        scene.scaleMode = .aspectFill
+        
         return scene
     }
     
@@ -57,13 +60,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func sceneDidLoad() {
-        //resize scene base on device
-        self.scaleMode = .aspectFit
         
         //physics world
         physicsWorld.contactDelegate = self
         
         // background music
+        music.run(SKAction.changeVolume(to: 0.2, duration: 0))
         addChild(music)
         
         // Setup joystick
@@ -97,6 +99,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else if child.name == "witch" {
                 if let child = child as? SKSpriteNode {
                     enemies.append(Witch(gameScene:self, enemy: child, target: self.player!))
+                }
+            } else if child.name == "golem" {
+                if let child = child as? SKSpriteNode {
+                    enemies.append(Golem(gameScene:self, enemy: child, target: self.player!))
                 }
             }
         }
@@ -358,7 +364,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player!.SpeechBubble(text: "A key!")
         } else if tile?.userData?.value(forKey: "door") != nil {
             if player!.key {
+                //use key
+                player?.key = false
+                //open door
                 objects?.setTileGroup(nil, forColumn: column!, row: row)
+                //sound effect
+                let sfx = SKAction.playSoundFileNamed("door_open.mp3", waitForCompletion: false)
+                player?.player?.run(sfx)
+                //hotfix spritkit tilemap bug by setting tiles in + shape to nil too
+                objects?.setTileGroup(nil, forColumn: column! - 1, row: row)
+                objects?.setTileGroup(nil, forColumn: column! + 1, row: row)
+                objects?.setTileGroup(nil, forColumn: column!, row: row - 1)
+                objects?.setTileGroup(nil, forColumn: column!, row: row + 1)
             }
         } else if tile?.userData?.value(forKey: "silverChest") != nil{
             let tileSet = SKTileSet(named: "dungeon_tools")
@@ -374,6 +391,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             //tutorial level exception
             if(self.name == "Tutorial"){
+                self.currentGameState = .win
+                self.gameOver()
+            }
+        } else if tile?.userData?.value(forKey: "bigSilverChest") != nil{
+            let tileSet = SKTileSet(named: "dungeon_tools")
+            objects?.setTileGroup(tileSet?.tileGroups[5], forColumn: column!, row: row)
+            player?.maxScore += tile?.userData?.value(forKey: "score") as! Int
+            
+            // sound effect
+            let sfx = SKAction.playSoundFileNamed("chest_open_gold.mp3", waitForCompletion: false)
+            player!.player!.run(sfx)
+            
+            //speech
+            player!.SpeechBubble(text: "Very Lucky day!")
+            
+            //level 2 level exception
+            if(self.name == "Level2"){
                 self.currentGameState = .win
                 self.gameOver()
             }

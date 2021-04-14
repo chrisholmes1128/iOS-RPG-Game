@@ -239,7 +239,7 @@ class Enemy {
         if(elapsedTime > cooldown) {
             enemy?.physicsBody?.pinned = false
             if TargetDistance() <= attackRange! {
-                if(attackRange! >= 100){
+                if(attackRange! >= 300){
                     RangeAttack()
                 } else {
                     MeleeAttack()

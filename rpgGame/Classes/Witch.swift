@@ -19,9 +19,9 @@ class Witch: Enemy {
         moveSpeed = 50
         attackRange = 500
         attackStagger = 0.3
-        attackDamage = 15
-        attackHitFrame = 1.3
-        aggroRange = 800
+        attackDamage = 5
+        attackHitFrame = 0.65
+        aggroRange = 500
         score = 500
         projectileName = "fireball_black_000"
         projectileSpeed = 200
@@ -46,7 +46,11 @@ class Witch: Enemy {
     override func Death() {
         super.Death()
         target?.SpeechBubble(text: "Yikes.")
-        gameScene.currentGameState = .win
-        gameScene.gameOver()
+        
+        // level 1 boss and win condition
+        if gameScene.name == "Level1" {
+            gameScene.currentGameState = .win
+            gameScene.gameOver()
+        }
     }
 }

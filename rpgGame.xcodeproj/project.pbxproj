@@ -46,6 +46,11 @@
 		9955AD3E261477D400445C3B /* chest_open_gold.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9955AD3C261477D400445C3B /* chest_open_gold.mp3 */; };
 		9955AD3F261477D400445C3B /* key_pickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9955AD3D261477D400445C3B /* key_pickup.mp3 */; };
 		9955AD972614990F00445C3B /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955AD962614990F00445C3B /* HowToPlayView.swift */; };
+		995992982626ECBA005919FE /* Level_2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995992972626ECBA005919FE /* Level_2.sks */; };
+		9959929C26272BBF005919FE /* GolemActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9959929B26272BBF005919FE /* GolemActions.sks */; };
+		9959929F26272C5D005919FE /* Golem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9959929E26272C5D005919FE /* Golem.swift */; };
+		995992A2262731B5005919FE /* heavy_slam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 995992A1262731B5005919FE /* heavy_slam.mp3 */; };
+		995992A52627338B005919FE /* door_open.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 995992A42627338B005919FE /* door_open.mp3 */; };
 		995FEF1225DC6B7200A1D259 /* WarriorActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995FEF1125DC6B7200A1D259 /* WarriorActions.sks */; };
 		995FEF9625DD140800A1D259 /* SkeletonActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 995FEF9525DD140800A1D259 /* SkeletonActions.sks */; };
 		995FEF9F25DD44BE00A1D259 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEF9E25DD44BE00A1D259 /* Player.swift */; };
@@ -108,6 +113,11 @@
 		9955AD3C261477D400445C3B /* chest_open_gold.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chest_open_gold.mp3; sourceTree = "<group>"; };
 		9955AD3D261477D400445C3B /* key_pickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = key_pickup.mp3; sourceTree = "<group>"; };
 		9955AD962614990F00445C3B /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
+		995992972626ECBA005919FE /* Level_2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level_2.sks; sourceTree = "<group>"; };
+		9959929B26272BBF005919FE /* GolemActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GolemActions.sks; sourceTree = "<group>"; };
+		9959929E26272C5D005919FE /* Golem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Golem.swift; sourceTree = "<group>"; };
+		995992A1262731B5005919FE /* heavy_slam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = heavy_slam.mp3; sourceTree = "<group>"; };
+		995992A42627338B005919FE /* door_open.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = door_open.mp3; sourceTree = "<group>"; };
 		995FEF1125DC6B7200A1D259 /* WarriorActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WarriorActions.sks; sourceTree = "<group>"; };
 		995FEF9525DD140800A1D259 /* SkeletonActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SkeletonActions.sks; sourceTree = "<group>"; };
 		995FEF9E25DD44BE00A1D259 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -227,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				994A0B8E260A6DA900F074D1 /* Tileset */,
+				995992972626ECBA005919FE /* Level_2.sks */,
 				992FA56C25D34E8A00C72FCB /* Level_1.sks */,
 				990773E0261D42C400B23431 /* Level_0.sks */,
 			);
@@ -254,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				995FEF1125DC6B7200A1D259 /* WarriorActions.sks */,
+				9959929B26272BBF005919FE /* GolemActions.sks */,
 				995FEF9525DD140800A1D259 /* SkeletonActions.sks */,
 				99A948AD25EF740500B71509 /* WolfActions.sks */,
 				99A948B225EF87BC00B71509 /* BatActions.sks */,
@@ -269,6 +281,7 @@
 				995FEF9E25DD44BE00A1D259 /* Player.swift */,
 				995FEFA325DD454D00A1D259 /* Enemy.swift */,
 				995FEFAB25DD458300A1D259 /* Skeleton.swift */,
+				9959929E26272C5D005919FE /* Golem.swift */,
 				99A948A825EF73BC00B71509 /* Wolf.swift */,
 				99A948B725EF87C700B71509 /* Bat.swift */,
 				9954889D25EF8E6900C518B8 /* Witch.swift */,
@@ -279,6 +292,8 @@
 		99F000CA25EEEBB700C9EC6A /* Sound effects */ = {
 			isa = PBXGroup;
 			children = (
+				995992A42627338B005919FE /* door_open.mp3 */,
+				995992A1262731B5005919FE /* heavy_slam.mp3 */,
 				9955AD3C261477D400445C3B /* chest_open_gold.mp3 */,
 				9955AD3D261477D400445C3B /* key_pickup.mp3 */,
 				994A0BD9260AE83D00F074D1 /* wolf_aggroed.mp3 */,
@@ -366,6 +381,7 @@
 				995488A325EF922300C518B8 /* ProjectileAction.sks in Resources */,
 				994A0BBB260AE2B800F074D1 /* player_damaged2.wav in Resources */,
 				99A948A425EF579A00B71509 /* bone_impact.mp3 in Resources */,
+				995992982626ECBA005919FE /* Level_2.sks in Resources */,
 				992FA56F25D34E8A00C72FCB /* Level_1.sks in Resources */,
 				99F000D125EEF3DC00C9EC6A /* flesh_hit.mp3 in Resources */,
 				99A948AE25EF740500B71509 /* WolfActions.sks in Resources */,
@@ -379,15 +395,18 @@
 				99A948A325EF579A00B71509 /* bone_breaks.mp3 in Resources */,
 				99A9489325EF4A8F00B71509 /* axe_swing2.mp3 in Resources */,
 				9955AD3F261477D400445C3B /* key_pickup.mp3 in Resources */,
+				9959929C26272BBF005919FE /* GolemActions.sks in Resources */,
 				9202D92125CCAA10002B2EDF /* Assets.xcassets in Resources */,
 				9955AD3E261477D400445C3B /* chest_open_gold.mp3 in Resources */,
 				995FEF1225DC6B7200A1D259 /* WarriorActions.sks in Resources */,
+				995992A52627338B005919FE /* door_open.mp3 in Resources */,
 				99A9489225EF4A8F00B71509 /* axe_swing1.mp3 in Resources */,
 				995FEF9625DD140800A1D259 /* SkeletonActions.sks in Resources */,
 				994A0B92260A6DBD00F074D1 /* Assets.xcassets in Resources */,
 				994A0BBF260AE2B800F074D1 /* player_attack1.wav in Resources */,
 				9954889925EF8DDD00C518B8 /* WitchAction.sks in Resources */,
 				994A0BBC260AE2B800F074D1 /* player_attack3.wav in Resources */,
+				995992A2262731B5005919FE /* heavy_slam.mp3 in Resources */,
 				994A0BA0260AD37600F074D1 /* Everlasting-Snow.mp3 in Resources */,
 				994A0BBE260AE2B800F074D1 /* player_damaged1.wav in Resources */,
 			);
@@ -426,6 +445,7 @@
 				92F1863825D2045300F46216 /* GameCenter.swift in Sources */,
 				99E5554F25D362D900AD0CCE /* GameView.swift in Sources */,
 				995FEFA425DD454D00A1D259 /* Enemy.swift in Sources */,
+				9959929F26272C5D005919FE /* Golem.swift in Sources */,
 				9202D95325CCAA1E002B2EDF /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
