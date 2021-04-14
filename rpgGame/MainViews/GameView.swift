@@ -22,7 +22,7 @@ struct GameView: View {
             PauseMenuView(pauseMenuShowing: $pauseMenuShowing).padding()
             
             SKViewContainer(level: self.level, scene: scene!).ignoresSafeArea()
-        
+            
             HStack(spacing: 40) {
                 //pause button
                 Button(action: {
@@ -49,9 +49,6 @@ struct GameView: View {
                 }
             }.padding(.bottom, 1620 / 2 - 100)
             .padding(.leading, 2160 / 2 - 160)
-            
-            
-            
         }
     }
 }

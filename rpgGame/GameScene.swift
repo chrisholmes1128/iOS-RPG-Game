@@ -20,7 +20,6 @@ struct bitMask {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
     /* Make a Class method to load levels */
     class func level(_ levelNumber: Int) -> GameScene? {
         guard let scene = GameScene(fileNamed: "Level_\(levelNumber)") else {
@@ -258,6 +257,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func pause() {
+        //disable pause button on finish state
+        if currentGameState == .win || currentGameState == .gameOver {
+            return
+        }
         if(currentGameState != .paused){
         // stop physics and touch
         physicsWorld.speed = 0
