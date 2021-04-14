@@ -371,8 +371,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player!.SpeechBubble(text: "A key!")
         } else if tile?.userData?.value(forKey: "door") != nil {
             if player!.key {
-                //use key
-                player?.key = false
+                //consume key after 2s
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                    player?.key = false
+                }
                 //open door
                 objects?.setTileGroup(nil, forColumn: column!, row: row)
                 //sound effect

@@ -37,6 +37,8 @@ struct GameView: View {
                 }
                 
                 Button(action: {
+                    scene?.currentGameState = .gameOver
+                    scene?.gameOver()
                     viewRouter.currentPage = .PauseMenuView
                 }) {
                     Image("menuIcon")
@@ -63,9 +65,9 @@ struct SKViewContainer: UIViewRepresentable {
         
         view.presentScene(scene)
         view.ignoresSiblingOrder = false
-        view.showsFPS = true
-        view.showsNodeCount = true
-        view.showsPhysics = true
+        view.showsFPS = false
+        view.showsNodeCount = false
+        view.showsPhysics = false
         
         return view
     }

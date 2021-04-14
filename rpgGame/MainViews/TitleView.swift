@@ -72,20 +72,20 @@ struct TitleView: View {
                                 }
                             }
                         
-                        Text("SETTINGS")
-                            .font(.system(size: 22, weight: .heavy, design: .rounded))
-                            .foregroundColor(.white)
-                            .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .transition(.move(edge: .leading))
-                            .padding()
-                            .border(Color.white, width: 3)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                withAnimation{
-                                    titleShowing.toggle()
-                                    viewRouter.currentPage = .optionsView
-                                }
-                            }
+//                        Text("SETTINGS")
+//                            .font(.system(size: 22, weight: .heavy, design: .rounded))
+//                            .foregroundColor(.white)
+//                            .frame(width: 180, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//                            .transition(.move(edge: .leading))
+//                            .padding()
+//                            .border(Color.white, width: 3)
+//                            .cornerRadius(8)
+//                            .onTapGesture {
+//                                withAnimation{
+//                                    titleShowing.toggle()
+//                                    viewRouter.currentPage = .optionsView
+//                                }
+//                            }
                         
                         Text("Connect to GameCentral")
                             .font(.system(size: 12, weight: .semibold, design: .rounded))
